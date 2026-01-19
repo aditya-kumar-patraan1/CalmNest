@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Star } from 'lucide-react';
+import { Star, Quote, ChevronLeft, ChevronRight, CheckCircle2, MoveHorizontal } from 'lucide-react';
 
 const FeedbackSlider = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -8,167 +8,143 @@ const FeedbackSlider = () => {
     const [translateX, setTranslateX] = useState(0);
     const sliderRef = useRef(null);
 
-   const feedbacks = [
-  {
-    message: "StillMind has truly changed my mornings. The guided meditations help me start each day with calm and clarity.",
-    name: "John Doe",
-  },
-  {
-    message: "I never thought mindfulness could fit into my busy schedule, but these short sessions make it easy and effective.",
-    name: "Jane Smith",
-  },
-  {
-    message: "The breathing exercises taught here have reduced my stress levels significantly. I feel more balanced every day.",
-    name: "Alice Johnson",
-  },
-  {
-    message: "As someone who struggles with focus, these mindfulness practices have helped me feel more present and productive.",
-    name: "Bob Brown",
-  },
-  {
-    message: "The teachers explain everything so simply. Even a few minutes of practice leaves me feeling refreshed.",
-    name: "Charlie Davis",
-  },
-  {
-    message: "After a long workday, I use StillMind to unwind. It’s like a reset button for my mind and body.",
-    name: "Eve Wilson",
-  },
-  {
-    message: "I’ve tried many meditation apps, but this one feels the most personal and authentic. Highly recommended!",
-    name: "Frank Thomas",
-  },
-  {
-    message: "The guided sessions are gentle yet powerful. I’ve noticed better sleep and reduced anxiety after just a few weeks.",
-    name: "Grace Lee",
-  },
-  {
-    message: "StillMind has helped me create a small daily ritual that keeps me grounded no matter how hectic life gets.",
-    name: "Hank Martin",
-  },
-  {
-    message: "I love the combination of mindfulness and reflection. The journaling section especially helps me track my growth.",
-    name: "Ivy Clark",
-  },
-];
-
+    const feedbacks = [
+        { id: 1, message: "StillMind has truly changed my mornings. The guided meditations help me start each day with calm and clarity.", name: "John Doe", rating: 5 },
+        { id: 2, message: "I love the combination of mindfulness and reflection. The journaling section especially helps me track my growth.", name: "Ivy Clark", rating: 5 },
+        { id: 3, message: "StillMind has helped me create a small daily ritual that keeps me grounded no matter how hectic life gets.", name: "Hank Martin", rating: 4 },
+        { id: 4, message: "The breathing exercises taught here have reduced my stress levels significantly. I feel more balanced every day.", name: "Alice Johnson", rating: 5 },
+        // ... add others as needed
+    ];
 
     const infiniteFeedbacks = [...feedbacks, ...feedbacks, ...feedbacks];
-    const itemWidth = 350;
+    const itemWidth = 380; // Adjusted for better spacing
 
     useEffect(() => {
         setCurrentIndex(feedbacks.length);
-    }, []);
+    }, [feedbacks.length]);
 
     const handleMouseDown = (e) => {
-        e.preventDefault();
         setIsDragging(true);
-        setStartX(e.clientX || e.touches?.[0]?.clientX || 0);
+        setStartX((e.clientX || e.touches?.[0]?.clientX) - translateX);
     };
 
     const handleMouseMove = (e) => {
         if (!isDragging) return;
-        const currentX = e.clientX || e.touches?.[0]?.clientX || 0;
-        const diff = currentX - startX;
-        setTranslateX(diff);
+        const currentX = e.clientX || e.touches?.[0]?.clientX;
+        setTranslateX(currentX - startX);
     };
 
     const handleMouseUp = () => {
-        if (!isDragging) return;
         setIsDragging(false);
-        if (Math.abs(translateX) > 50) {
-            if (translateX > 0) {
-                moveSlide(-1);
-            } else {
-                moveSlide(1);
-            }
-        }
+        const threshold = 100;
+        if (translateX < -threshold) moveSlide(1);
+        else if (translateX > threshold) moveSlide(-1);
         setTranslateX(0);
     };
 
     const moveSlide = (direction) => {
-        const newIndex = currentIndex + direction;
-        setCurrentIndex(newIndex);
-        setTimeout(() => {
-            if (newIndex >= feedbacks.length * 2) {
-                setCurrentIndex(feedbacks.length);
-            } else if (newIndex < feedbacks.length) {
-                setCurrentIndex(feedbacks.length * 2 - 1);
-            }
-        }, 300);
+        setCurrentIndex((prev) => prev + direction);
     };
 
-    const renderStars = (rating) => {
-        return Array.from({ length: 5 }, (_, i) => (
-            <Star
-                key={i}
-                className={`w-4 h-4 ${i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
-            />
-        ));
-    };
+    // Smooth loop logic
+    useEffect(() => {
+        if (currentIndex >= feedbacks.length * 2) {
+            setTimeout(() => {
+                sliderRef.current.style.transition = 'none';
+                setCurrentIndex(feedbacks.length);
+            }, 300);
+        }
+        if (currentIndex < feedbacks.length) {
+            setTimeout(() => {
+                sliderRef.current.style.transition = 'none';
+                setCurrentIndex(feedbacks.length * 2 - 1);
+            }, 300);
+        }
+        sliderRef.current.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+    }, [currentIndex, feedbacks.length]);
 
     return (
-        <div className="mt-20 w-full max-w-6xl mx-auto p-6 bg-transparent rounded-2xl">
-            <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2">What Our Customers Say</h2>
-                <p className="text-gray-600">Drag the cards to explore more testimonials</p>
-            </div>
+        <div className="bg-[#FFFEFB] py-20 px-4 overflow-hidden">
+            <div className="max-w-6xl mx-auto relative">
+                
+                {/* Header Section */}
+                <div className="text-center mb-16">
+                    <h2 className="text-4xl font-serif font-bold text-slate-800 mb-4 italic">What Our Customers Say</h2>
+                    <div className="flex items-center justify-center gap-2 text-slate-500">
+                        <MoveHorizontal size={18} className="animate-pulse" />
+                        <p className="text-sm font-medium tracking-wide uppercase">Drag to explore</p>
+                    </div>
+                </div>
 
-            <div className="relative overflow-hidden">
-                <div
-                    ref={sliderRef}
-                    className="flex transition-transform duration-300 ease-out cursor-grab active:cursor-grabbing select-none"
-                    style={{
-                        transform: `translateX(${-currentIndex * itemWidth + translateX}px)`,
-                        width: `${infiniteFeedbacks.length * itemWidth}px`,
-                        userSelect: 'none',
-                        WebkitUserSelect: 'none',
-                        MozUserSelect: 'none',
-                        msUserSelect: 'none'
-                    }}
-                    onMouseDown={handleMouseDown}
-                    onMouseMove={handleMouseMove}
-                    onMouseUp={handleMouseUp}
-                    onMouseLeave={handleMouseUp}
-                    onTouchStart={handleMouseDown}
-                    onTouchMove={handleMouseMove}
-                    onTouchEnd={handleMouseUp}
-                >
-                    {infiniteFeedbacks.map((feedback, index) => (
-                        <div
-                            key={`${feedback.id}-${Math.floor(index / feedbacks.length)}`}
-                            className="flex-shrink-0 w-80 mx-4 bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
-                            style={{ width: '320px' }}
-                        >
-                            <div className="flex items-center mb-4">
-                                <div>
-                                    <h3 className="font-semibold text-gray-800">{feedback.name}</h3>
-                                    <p className="text-sm text-gray-500">{feedback.message}</p>
+                {/* Slider Container */}
+                <div className="relative group">
+                    <div
+                        ref={sliderRef}
+                        className="flex cursor-grab active:cursor-grabbing"
+                        style={{
+                            transform: `translateX(${-currentIndex * itemWidth + translateX}px)`,
+                        }}
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                        onMouseLeave={handleMouseUp}
+                        onTouchStart={handleMouseDown}
+                        onTouchMove={handleMouseMove}
+                        onTouchEnd={handleMouseUp}
+                    >
+                        {infiniteFeedbacks.map((item, index) => (
+                            <div
+                                key={index}
+                                className="flex-shrink-0 px-4 transition-all duration-500"
+                                style={{ width: `${itemWidth}px` }}
+                            >
+                                <div className="bg-white p-8 rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100 h-full flex flex-col justify-between hover:shadow-2xl hover:-translate-y-1 transition-all">
+                                    <div>
+                                        <Quote className="text-emerald-100 fill-emerald-50 mb-4" size={40} />
+                                        <div className="flex mb-4">
+                                            {[...Array(5)].map((_, i) => (
+                                                <Star key={i} size={16} className={`${i < item.rating ? 'text-amber-400 fill-amber-400' : 'text-slate-200'}`} />
+                                            ))}
+                                        </div>
+                                        <p className="text-slate-600 leading-relaxed text-lg italic">
+                                            "{item.message}"
+                                        </p>
+                                    </div>
+
+                                    <div className="mt-8 flex items-center gap-4 pt-6 border-t border-slate-50">
+                                        <img 
+                                            src={`https://i.pravatar.cc/150?u=${item.name}`} 
+                                            alt={item.name}
+                                            className="w-12 h-12 rounded-full ring-2 ring-emerald-50 object-cover"
+                                        />
+                                        <div>
+                                            <div className="flex items-center gap-1">
+                                                <h4 className="font-bold text-slate-800">{item.name}</h4>
+                                                <CheckCircle2 size={14} className="text-emerald-500" />
+                                            </div>
+                                            <p className="text-xs text-slate-400 font-medium">Verified Practitioner</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+
+                    {/* Navigation Controls */}
+                    <button 
+                        onClick={() => moveSlide(-1)}
+                        className="absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:scale-110 transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
+                    >
+                        <ChevronLeft size={24} />
+                    </button>
+                    <button 
+                        onClick={() => moveSlide(1)}
+                        className="absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:scale-110 transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
+                    >
+                        <ChevronRight size={24} />
+                    </button>
                 </div>
             </div>
-
-          
-
-            {/* <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
-                <button
-                    onClick={() => moveSlide(-1)}
-                    className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors duration-200"
-                >
-                    <span className="text-gray-600 font-bold">‹</span>
-                </button>
-            </div> */}
-
-            {/* <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
-                <button
-                    onClick={() => moveSlide(1)}
-                    className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors duration-200"
-                >
-                    <span className="text-gray-600 font-bold">›</span>
-                </button>
-            </div> */}
         </div>
     );
 };
