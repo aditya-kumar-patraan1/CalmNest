@@ -14,20 +14,26 @@ import yoga from "../assets/yoga.png";
 import stress from "../assets/stress.png"; 
 import attentive from "../assets/attentive.png";
 import sleep from "../assets/sleep.png";
+import girl_meditation from "../assets/girl_meditation.png";
+import leafGirl from "../assets/leafGirl.png";
+import happyBalls from "../assets/happyBalls.png";
+import meditationFlower from "../assets/meditationFlower.png";
+import flower from "../assets/flower.png";
+import blessing from "../assets/blessing.png";
 
 const imageColumns = [
   [
-    { src: blogtop3 },
-    { src: "/peaceful-yoga-meditation.png" },
-    { src: "/family-cooking.png" },
-    { src: blogtop4 },
-    { src: "/friends-laughing-coffee.png" },
-    { src: Photo1 },
+    { src: meditationFlower },   
+    { src: girl_meditation },
+    { src: happyBalls },
+    { src: flower }, 
+    { src: mountain },
+    { src: blessing },  
   ],
   [
     { src: Photo1},
     { src: blogtop2 },
-    { src: mountain },
+    { src: leafGirl },
     { src: god_meditation },
     { src: relaxation },
     { src: blogtop4 },

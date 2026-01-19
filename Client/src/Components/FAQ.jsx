@@ -65,8 +65,9 @@ const FAQ = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-16 border rounded-3xl shadow-md bg-white">
-      <div className="flex flex-col lg:flex-row gap-12">
+    <div className="bg-[#FEFEF1] p-5 w-screen h-screen">
+    <div className="max-w-6xl mx-auto px-6 py-16 border rounded-3xl shadow-md bg-[#FEFEF1]">
+      <div className="flex flex-col lg:flex-row  gap-12">
         {/* Left side */}
         <div className="flex-1">
           <h2 className="text-4xl font-bold mb-6 leading-snug">
@@ -103,6 +104,7 @@ const FAQ = () => {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 };
