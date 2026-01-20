@@ -2,17 +2,10 @@ const { main } = require("../Services/ai.service");
 
 const getYourMood = async (req, res) => {
     const { myCurrMood } = req.body;
+    console.log("here");
     console.log(`my Current mood ${myCurrMood}`);
 
     try {
-
-        if (myCurrMood == null || myCurrMood == "") {
-            return res.json({
-                status: 0,
-                data: null
-            });
-        }
-
         
         const resultData = await main(myCurrMood);
 
