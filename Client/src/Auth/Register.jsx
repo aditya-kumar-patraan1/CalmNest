@@ -4,6 +4,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../Context/AppContext";
+import BackgroundTemplate from "../assets/BackgroundTemplate.png";
 
 const Register = () => {
   const Navigate = useNavigate();
@@ -52,8 +53,9 @@ const Register = () => {
   useEffect(() => {}, [formData]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-10 bg-gray-50">
-      <div className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-xl shadow-lg p-6 sm:p-8 md:p-10 bg-white">
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-10 bg-gray-50 relative">
+      <img src={BackgroundTemplate} className="absolute top-0 left-0 h-full w-full"/>
+      <div className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-xl shadow-lg p-6 sm:p-8 md:p-10 bg-white z-40">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center mb-6 sm:mb-8 text-gray-900">
           Create Your Account
         </h2>

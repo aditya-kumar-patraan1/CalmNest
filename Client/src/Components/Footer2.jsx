@@ -25,10 +25,10 @@ const Footer2 = () => {
         {/* Link groups */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-[64px] gap-y-[16px] text-[14px] leading-[20px]">
           {[
-            { title: "About Us", items: ["Our Story", "How We Price"] },
-            { title: "Reach Us", items: ["Contact Support","Work With Us","Partnerships","Press"] },
-            { title: "Gifting", items: ["Gift Happier","Redeem a Gift"] },
-            { title: "Support", items: ["Free Meditations","FAQ","Help Center"] }
+            { title: "About Us", items: ["Getting started"] },
+            { title: "Reach Us", items: ["Feedback & Work With Us"] },
+            { title: "Features Supported", items:  ["Meeting with psychiatrist","Breath-in Breath-out"]},
+            { title : "Journals", items: ["track your journals"]}
           ].map((section, idx) => (
             <div key={idx}>
               <h4 className="font-semibold text-[16px] mb-2">{section.title}</h4>
@@ -44,7 +44,7 @@ const Footer2 = () => {
         {/* CTA Button */}
         <div className="ml-auto">
           <button  onClick={()=>window.open("/MeditationAndExercise","__blank")}
-           className="bg-[#f2ca02] text-[#262626] font-medium text-[14px] leading-[20px] py-[12px] px-[24px] rounded-full">
+           className="bg-[#f2ca02] cursor-pointer text-[#262626] font-medium text-[14px] leading-[20px] py-[12px] px-[24px] rounded-full">
             Try for free
           </button>
           <div className="flex items-center gap-[12px]  py-8">
@@ -64,7 +64,7 @@ const Footer2 = () => {
           {/* <div className="w-[32px] h-[32px] bg-[#262626] rounded-full flex items-center justify-center">
             <FaX className="text-white w-[16px] h-[16px]" /> Replace with the small icon
           </div> */}
-          <span>© 2025 Happier Meditation, Inc. All Rights Reserved</span>
+          <span>© 2026 Happier Meditation, Inc. All Rights Reserved</span>
         </div>
   
         {/* Right: links and socials */}

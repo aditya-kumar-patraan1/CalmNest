@@ -4,6 +4,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
 import { useAppContext } from "../Context/AppContext";
+import BackgroundTemplate from "../assets/BackgroundTemplate.png";
 
 const Login = ({ isLightMode, setisLightMode }) => {
   const { BACKEND_URL, setisLoggedIn, isLoggedIn, userData, getUserData } = useAppContext();
@@ -38,8 +39,9 @@ const Login = ({ isLightMode, setisLightMode }) => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
-      <div className="bg-white w-full max-w-md sm:max-w-lg md:max-w-xl rounded-xl shadow-lg p-6 sm:p-8 md:p-10">
+    <div className="min-h-screen flex relative items-center justify-center px-4 bg-gray-50">
+      <img src={BackgroundTemplate} className="h-full w-full absolute"/>
+      <div className="bg-white w-full max-w-md sm:max-w-lg md:max-w-xl rounded-xl shadow-lg p-6 sm:p-8 md:p-10 z-10">
         
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center mb-6 text-gray-900">
           Login to Your Account
