@@ -8,46 +8,42 @@ import BackgroundTemplate from "../assets/BackgroundTemplate.png";
 
 const Register = () => {
   const Navigate = useNavigate();
-  const { BACKEND_URL, setisLoggedIn, isLoggedIn, userData, getUserData } = useAppContext();
+  const { setisLoggedIn, isLoggedIn, userData, getUserData } = useAppContext();
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const [formData, setFormdata] = useState({
     name: "",
     email: "",
     password: "",
   });
 
+  async function saveToMongo(){
+    const result = await axios.post(`${BACKEND_URL}/api/v1/register`,formData)
+    return result.data;
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!formData.email || !formData.password || !formData.name) {
+      toast.error(`Please fill all details.`);
+    }
 
-    await axios
-      .post(`${BACKEND_URL}/api/auth/register`, formData, {
-        withCredentials: true,
-      })
-      .then((myData) => {
-        setFormdata({ name: "", email: "", password: "" });
-
-        if (myData.data.status === 1) {
-          toast.success("Registered Successfully...");
-          setisLoggedIn(true);
-          getUserData();
-          Navigate("/");
-        } else {
-          toast.error("Registration not done...");
-          setisLoggedIn(false);
-        }
-      })
-      .catch(() => {
-        toast.error("Something went wrong...");
-      });
+    try{
+      const res = await saveToMongo();
+      console.log(res);
+      if(res.status === 1){
+        toast.success("User registered");
+      }
+      else{
+        throw new Error();
+      }
+    } 
+    catch(e){
+      toast.error("User not registered");
+    }
   }
 
   function handleChange(e) {
     setFormdata({ ...formData, [e.target.name]: e.target.value });
-  }
-
-  function showToaster() {
-    if (!formData.email || !formData.password || !formData.name) {
-      toast.error(`Please fill all details.`);
-    }
   }
 
   useEffect(() => {}, [formData]);
@@ -122,7 +118,6 @@ const Register = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
             <button
               type="submit"
-              onClick={showToaster}
               className="w-full sm:w-auto px-6 py-3 rounded-lg font-medium text-white bg-gray-900 hover:bg-gray-800 transition cursor-pointer"
             >
               Register
