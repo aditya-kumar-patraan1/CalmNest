@@ -64,15 +64,15 @@ const Footer2 = () => {
           {/* <div className="w-[32px] h-[32px] bg-[#262626] rounded-full flex items-center justify-center">
             <FaX className="text-white w-[16px] h-[16px]" /> Replace with the small icon
           </div> */}
-          <span>© 2026 Happier Meditation, Inc. All Rights Reserved</span>
+          <span>© 2026 CalmNest Meditation, Inc. All Rights Reserved</span>
         </div>
   
         {/* Right: links and socials */}
         <div className="flex flex-col md:flex-row items-center gap-[16px]">
           
-          <div className="flex gap-[24px] text-[#262626] cursor-pointer">
+          <div className="flex gap-[24px] text-[#262626]">
             {["Sitemap","Privacy Policy","Terms & Conditions"].map((link, i) => (
-              <a key={i} href="#" className="hover:underline">{link}</a>
+              <p>{link}</p>
             ))}
           </div>
         </div>

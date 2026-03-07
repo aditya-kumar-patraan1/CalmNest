@@ -8,5 +8,8 @@ export default defineConfig({
     tailwindcss(),
     // require('tailwind-scrollbar'),
   ],
+  server:{
+    port : 5000
+  }
 })
 

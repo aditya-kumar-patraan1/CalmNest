@@ -41,7 +41,7 @@ const CompletePage = () => {
     <BannerForMeditation/>
     <SliderComponent/>
     <AnalyseHeroPage/>
-    <Brands/>
+    {/* <Brands/> */}
     <Testimonials/>
     <ReadMore/>
     <FAQ/>

@@ -4,31 +4,31 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "What is CalmMind and how did it get started?",
-    answer: "CalmMind is a wellness platform started by experts to help people live healthier, mindful lives."
+    question: "What is CalmNest and how did it get started?",
+    answer: "CalmNest is a wellness platform started by experts to help people live healthier, mindful lives."
   },
   {
     question: "What’s included in my membership?",
     answer: "Your membership includes guided meditations, expert courses, daily inspiration, and more."
   },
   {
-    question: "How is CalmMind priced?",
-    answer: "CalmMind offers monthly, yearly, and lifetime pricing options depending on your needs."
+    question: "How is CalmNest priced?",
+    answer: "CalmNest offers monthly, yearly, and lifetime pricing options depending on your needs."
   },
   {
-    question: "What types of meditation and mindfulness practices does CalmMind offer?",
-    answer: "CalmMind offers breathing exercises, guided meditation, body scans, mindful movement, and more."
+    question: "What types of meditation and mindfulness practices does CalmNest offer?",
+    answer: "CalmNest offers breathing exercises, guided meditation, body scans, mindful movement, and more."
   },
   {
-    question: "Who are the teachers and experts behind CalmMind?",
-    answer: "CalmMind collaborates with psychologists, meditation teachers, and mindfulness coaches worldwide."
+    question: "Who are the teachers and experts behind CalmNest?",
+    answer: "CalmNest collaborates with psychologists, meditation teachers, and mindfulness coaches worldwide."
   },
   {
-    question: "Can beginners use CalmMind?",
+    question: "Can beginners use CalmNest?",
     answer: "Yes! It’s perfect for both beginners and experienced practitioners."
   },
   {
-    question: "What kind of resources does CalmMind have for dealing with stress, anxiety, and other challenges?",
+    question: "What kind of resources does CalmNest have for dealing with stress, anxiety, and other challenges?",
     answer: "You’ll find courses, audio guides, calming music, and expert advice on tackling various mental challenges."
   }
 ];

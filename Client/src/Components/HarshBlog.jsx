@@ -14,7 +14,7 @@ import Footer2 from "./Footer2";
 const Logo = ({ width = 256, height = 256 }) => (
   <div
     style={{ width, height }}
-    className="rounded-[19px] bg-yellow-400 flex items-center justify-center shadow-md"
+    className="rounded-[19px] bg-[#FEF9C2] flex items-center justify-center shadow-md"
   >
     {/* Black circle */}
     <div
@@ -232,10 +232,6 @@ export default function BlogTop() {
               
             </div>
           ))}
-          
-       <button className="px-6 py-3 w-fit block mx-auto border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition">
-          Read more
-        </button>
         </div>
         
       </div>

@@ -1,5 +1,5 @@
-import React, { use, useEffect, useRef, useState } from "react"
-import { Leaf, Menu, X } from "lucide-react"
+import React, { use, useEffect, useRef, useState } from "react";
+import { Leaf, Menu, X } from "lucide-react";
 import gsap from "gsap";
 import CounterStats from "./CounterStats";
 import { useNavigate } from "react-router-dom";
@@ -7,45 +7,49 @@ import { useNavigate } from "react-router-dom";
 export default function HeaderPage() {
   const [open, setOpen] = useState(false);
 
-  const [isAnimate,setisAnimate] = useState(false);
-  const Navigate=useNavigate();
-  const headRef=useRef(null);
+  const [isAnimate, setisAnimate] = useState(false);
+  const Navigate = useNavigate();
+  const headRef = useRef(null);
 
-  const stats=[
-    {value:15,label:'Experienced Teachers',suffix:'+'},
-    {value:200,label:'Guided Sessions',suffix:'+'},
-    {value:98,label:'User Satisfaction',suffix:'%'}
-  ]
+  const stats = [
+    { value: 15, label: "Experienced Teachers", suffix: "+" },
+    { value: 200, label: "Guided Sessions", suffix: "+" },
+    { value: 98, label: "User Satisfaction", suffix: "%" },
+  ];
 
   const AllTexts = [
     "Calm breath. Quiet mind.",
     "Release tension. Embrace peace.",
     "Observe thoughts. Discover silence.",
     "Seek balance. Welcome harmony.",
-    "Breathe deeply. Live mindfully."
-  ]
+    "Breathe deeply. Live mindfully.",
+  ];
 
-  useEffect(()=>{
+  useEffect(() => {
     setisAnimate(true);
-  },[]);
+  }, []);
 
-  useEffect(()=>{
-    if(isAnimate){
+  useEffect(() => {
+    if (isAnimate) {
       gsap.fromTo(
         headRef.current,
-        { y: 50, opacity: 0 },   // 👈 start: niche + invisible
-      { y: 0, opacity: 1, duration: 1, ease: "power3.out" } 
+        { y: 50, opacity: 0 }, // 👈 start: niche + invisible
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
       );
     }
-  },[isAnimate]);
+  }, [isAnimate]);
 
   const navItems = [
     { href: "#", label: "Home" },
     { href: "/FAQ", label: "About" },
     { href: "/MeditationAndExercise", label: "Exercise" },
     { href: "#addjournals", label: "Add Journals" },
-    { href: "/Contact", label: "Contact" },
-  ]
+    { href: "/WellnessCheck", label: "Wellness Check" },
+    {href:"/Dashboard",label:"Dashboard"},
+    {href:"/MoodJournal",label:"Mood Journal"},
+    { href: "/Contact", label: "Contact" }
+    // {href:"/AiAssitant",label:"AI Assistant"}
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br text-slate-900">
@@ -62,46 +66,46 @@ export default function HeaderPage() {
           className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12"
         >
           <div className="flex items-center gap-3 animate-[slideInLeft_0.6s_ease-out]">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg">
-              <Leaf className="h-5 w-5 text-white" aria-hidden="true" />
+            <div className="flex h-10 w-10 items-center justify-center ">
+              <Leaf className="h-5 w-5 text-slate-900" aria-hidden="true" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-slate-900">StillMind</span>
+            <span className="text-xl font-bold tracking-tight text-slate-900">
+              CalmNest
+            </span>
           </div>
 
-         <div className="hidden items-center gap-10 md:flex">
-  <ul className="flex items-center gap-8">
-    {navItems.map((item, index) => (
-      <li
-        key={item.label}
-        className="animate-[fadeInDown_0.6s_ease-out]"
-        style={{ animationDelay: `${0.1 + index * 0.1}s` }}
-      >
-        <a
-          href={item.href}
-          className="relative text-sm font-medium text-slate-600 transition-all duration-300 hover:text-slate-900 px-2 py-1"
-        >
-          {item.label}
-        </a>
-      </li>
-    ))}
-  </ul>
+          <div className="hidden items-center gap-10 md:flex">
+            <ul className="flex items-center gap-8">
+              {navItems.map((item, index) => (
+                <li
+                  key={item.label}
+                  className="animate-[fadeInDown_0.6s_ease-out]"
+                  style={{ animationDelay: `${0.1 + index * 0.1}s` }}
+                >
+                  <a
+                    href={item.href}
+                    className="relative text-sm font-medium text-slate-600 transition-all duration-300 hover:text-slate-900 px-2 py-1"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-
-  <button
-    onClick={()=>window.open("/LobbyPage","_blank")}
-    className="inline-flex items-center cursor-pointer justify-center rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 animate-[slideInRight_0.6s_ease-out]"
-  >
-    1:1 Expert Session
-  </button>
-  {/* ✅ Register Button */}
-  <button
-    onClick={() => Navigate("/RegisterPage")}
-    className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 backdrop-blur-sm animate-[slideInRight_0.6s_ease-out] cursor-pointer"
-  >
-    Register
-  </button>
-</div>
-
+            <button
+              onClick={() => window.open("/LobbyPage", "_blank")}
+              className="inline-flex items-center cursor-pointer justify-center rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 animate-[slideInRight_0.6s_ease-out]"
+            >
+              1:1 Expert Session
+            </button>
+            {/* ✅ Register Button */}
+            <button
+              onClick={() => Navigate("/RegisterPage")}
+              className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 backdrop-blur-sm animate-[slideInRight_0.6s_ease-out] cursor-pointer"
+            >
+              Register
+            </button>
+          </div>
 
           <button
             type="button"
@@ -115,11 +119,18 @@ export default function HeaderPage() {
           </button>
         </nav>
 
-        <div id="mobile-menu" className={`md:hidden transition-all duration-300 ease-out ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"} border-t border-slate-200 bg-white/95 backdrop-blur-lg`}>
+        <div
+          id="mobile-menu"
+          className={`md:hidden transition-all duration-300 ease-out ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"} border-t border-slate-200 bg-white/95 backdrop-blur-lg`}
+        >
           <div className="mx-auto max-w-7xl px-6 py-4 sm:px-8 lg:px-12">
             <ul className="flex flex-col gap-2">
               {navItems.map((item, index) => (
-                <li key={item.label} className="animate-[slideInLeft_0.4s_ease-out]" style={{animationDelay: open ? `${index * 0.1}s` : '0s'}}>
+                <li
+                  key={item.label}
+                  className="animate-[slideInLeft_0.4s_ease-out]"
+                  style={{ animationDelay: open ? `${index * 0.1}s` : "0s" }}
+                >
                   <a
                     href={item.href}
                     onClick={() => setOpen(false)}
@@ -146,32 +157,41 @@ export default function HeaderPage() {
       <main id="main">
         <section className="relative overflow-hidden h-fit bg-tranparent">
           <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-20 sm:px-8 md:py-9 lg:grid-cols-2 bg-transparent">
-            <div className="order-2 max-w-2xl lg:order-1 bg-transparent" ref={headRef}>
+            <div
+              className="order-2 max-w-2xl lg:order-1 bg-transparent"
+              ref={headRef}
+            >
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm">
-                <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-slate-600 to-slate-800 animate-pulse" aria-hidden="true" />
+                <span
+                  className="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-slate-600 to-slate-800 animate-pulse"
+                  aria-hidden="true"
+                />
                 Meditation & Mindfulness
               </div>
               <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
-                Find stillness.<br />
+                Your Safe Space 
+                <br />
                 <span className="bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text text-transparent">
-                  Cultivate clarity.
+                  for a Healthier Mind.
                 </span>
               </h1>
-              <p className={`mt-6 text-lg leading-8 text-slate-600 sm:text-xl max-w-xl`} >
-                Guided sessions and thoughtful programs to help you slow down, breathe, and build a calm, 
-                Designed by experienced teachers for busy modern life.
+              <p
+                className={`mt-6 text-lg leading-8 text-slate-600 sm:text-xl max-w-xl`}
+              >
+                Explore guided meditation, track your emotional well-being, and connect with supportive resources designed for modern life.
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <button
-                 onClick={()=>window.open("/LobbyPage","_blank")}
-
+                  onClick={() => window.open("/LobbyPage", "_blank")}
                   className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 cursor-pointer"
                 >
                   Start a Free Session
                 </button>
                 <button
-                onClick={()=>window.open("/MeditationAndExercise","_blank")}
+                  onClick={() =>
+                    window.open("/MeditationAndExercise", "_blank")
+                  }
                   className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-8 py-4 text-base font-semibold text-slate-900 shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 cursor-pointer focus-visible:ring-offset-2 backdrop-blur-sm"
                 >
                   Mindfullness Exercise
@@ -179,7 +199,7 @@ export default function HeaderPage() {
               </div>
 
               <div className="mt-12 grid grid-cols-1 gap-6 text-center sm:grid-cols-3 sm:max-w-2xl">
-               {stats.map((stat, index) => (
+                {stats.map((stat, index) => (
                   <CounterStats
                     value={stat.value}
                     label={stat.label}
@@ -212,11 +232,13 @@ export default function HeaderPage() {
                   </p>
                 </div>
               </div>
-              <p className="mt-4 text-center text-sm text-slate-500">Real practice. Real calm. Begin in minutes.</p>
+              <p className="mt-4 text-center text-sm text-slate-500">
+                Real practice. Real calm. Begin in minutes.
+              </p>
             </div>
           </div>
         </section>
       </main>
     </div>
-  )
+  );
 }
