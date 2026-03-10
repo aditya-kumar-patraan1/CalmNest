@@ -1,112 +1,130 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import PreaceFulYogaImage from "../assets/PeacefulYogaImage.png"
-import BookReadingImage from "../assets/BookReadingImage.png"
+import { useNavigate } from "react-router-dom";
+
+import PreaceFulYogaImage from "../assets/PeacefulYogaImage.png";
+import BookReadingImage from "../assets/BookReadingImage.png";
 
 const BannerForMeditation = () => {
   const [turn, setTurn] = useState(true);
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const slideToBeShown = [
-   {
-  turn: true,
-  heading: "Connect with Experts Nearby for Your Well-Being",
-  description:
-    "Get guidance from trusted professionals around you — whether it’s a doctor, therapist, or wellness expert. Find the right support at the right time, adapted to your personal needs and lifestyle.",
-  image: PreaceFulYogaImage,
-  url:"/LocationTracker"
-}
-,
-  {
-  turn: false,
-  heading: "Your AI Expert, Always Here for You",
-  description:
-    "Get instant support and personalized guidance from our AI Expert. Whether you seek quick answers, tailored recommendations, or ongoing check-ins, the AI adapts to your unique journey and needs every time you connect.",
-  image: BookReadingImage,
-  url:"/AIHealthAssistant"
-}
-
+  const slides = [
+    {
+      turn: true,
+      heading: "Connect with Experts Nearby for Your Well-Being",
+      description:
+        "Get guidance from trusted professionals around you — whether it’s a doctor, therapist, or wellness expert.",
+      image: PreaceFulYogaImage,
+      url: "/LocationTracker",
+    },
+    {
+      turn: false,
+      heading: "Your AI Expert, Always Here for You",
+      description:
+        "Get instant support and personalized guidance from our AI Expert with smart recommendations.",
+      image: BookReadingImage,
+      url: "/AIHealthAssistant",
+    },
   ];
 
-  const activeSlide = slideToBeShown.find((item) => item.turn === turn);
+  const activeSlide = slides.find((item) => item.turn === turn);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-[#FAFAFA] font-sans">
-      <div className="w-9/12 h-full flex flex-row overflow-hidden bg-transparent">
-        {/* Left side - Image */}
-        <div className="w-1/2 h-[100%]  flex items-center justify-center">
-        <AnimatePresence mode="wait">
+    <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50 to-purple-50 relative overflow-hidden">
+
+      {/* background glow */}
+      <div className="absolute w-[400px] h-[400px] bg-purple-200 blur-[120px] opacity-40 rounded-full top-[-80px] left-[-80px]" />
+      <div className="absolute w-[400px] h-[400px] bg-blue-200 blur-[120px] opacity-40 rounded-full bottom-[-80px] right-[-80px]" />
+
+      <div className="w-10/12 h-[80%] grid lg:grid-cols-2 gap-10 items-center">
+
+        {/* IMAGE */}
+        <div className="flex justify-center items-center">
+
+          <AnimatePresence mode="wait">
             <motion.img
               key={activeSlide.heading}
               src={activeSlide.image}
-              initial={{ opacity: 0, y: 20 }}
-              className="h-[70%] rounded-md object-cover  w-[100%]"
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-        </motion.img>
-        </AnimatePresence>
+              initial={{ opacity: 0, scale: 0.9, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, y: -40 }}
+              transition={{ duration: 0.6 }}
+              className="rounded-2xl shadow-2xl w-[85%] hover:scale-105 transition duration-500"
+            />
+          </AnimatePresence>
+
         </div>
 
-        {/* Right side - Content */}
-        <div className="w-1/2 flex flex-col justify-center px-10 py-8 bg-transparent">
-          {/* Toggle buttons */}
-          <div className="flex justify-center mb-8">
-            <div className="flex flex-row gap-2 bg-gray-100 rounded-full px-2 py-1">
+        {/* CONTENT */}
+        <div className="flex flex-col justify-center">
+
+          {/* Toggle */}
+          <div className="flex justify-start mb-8">
+            <div className="flex gap-2 bg-white shadow-md p-1 rounded-full">
+
               <button
-                className={`rounded-full px-4 py-2 text-sm cursor-pointer font-medium transition ${
+                onClick={() => setTurn(true)}
+                className={`px-5 py-2 text-sm rounded-full font-medium transition ${
                   turn
                     ? "bg-black text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    : "text-gray-600 hover:bg-gray-100"
                 }`}
-                onClick={() => setTurn(true)}
               >
-                Flexible
+                Experts Nearby
               </button>
+
               <button
-                className={`rounded-full cursor-pointer px-4 py-2 text-sm font-medium transition ${
+                onClick={() => setTurn(false)}
+                className={`px-5 py-2 text-sm rounded-full font-medium transition ${
                   !turn
                     ? "bg-black text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    : "text-gray-600 hover:bg-gray-100"
                 }`}
-                onClick={() => setTurn(false)}
               >
-                Personalized
+                AI Expert
               </button>
+
             </div>
           </div>
 
-          {/* Animated Content */}
+          {/* Animated Text */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeSlide.heading} // unique key so AnimatePresence triggers
-              initial={{ opacity: 0, y: 20 }}
+              key={activeSlide.heading}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
+              exit={{ opacity: 0, y: -40 }}
+              transition={{ duration: 0.6 }}
             >
-              {/* Heading */}
-              <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-5 leading-snug">
-                {activeSlide.heading}
+
+              <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                <span className="bg-gradient-to-r from-black to-gray-500 bg-clip-text text-transparent">
+                  {activeSlide.heading}
+                </span>
               </h1>
 
-              {/* Description */}
-              <p className="text-gray-600 text-base lg:text-lg mb-8 leading-relaxed">
+              <p className="text-gray-600 text-lg mb-8 leading-relaxed max-w-xl">
                 {activeSlide.description}
               </p>
 
-              {/* CTA Button */}
-              <button
-                className="hover:bg-white block mx-0 border border-black hover:text-black px-5 p-3 text-sm rounded-full w-fit h-auto  text-white bg-black font-bold cursor-pointer hover:shadow shadow-gray-500 transition-all duration-300"
-                onClick={() => window.open(activeSlide.url,"__blank")}
+              <motion.button
+                whileHover={{ scale: 1.07 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-black text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl transition"
+                onClick={() => navigate(activeSlide.url)}
               >
                 Try for Free
-              </button>
+                <span className="transition group-hover:translate-x-1">
+                  →
+                </span>
+              </motion.button>
+
             </motion.div>
           </AnimatePresence>
+
         </div>
+
       </div>
     </div>
   );

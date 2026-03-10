@@ -1,20 +1,21 @@
-import React, { use, useEffect, useRef, useState } from "react";
-import { Leaf, Menu, X } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Leaf, Menu, X, Sparkles, ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import CounterStats from "./CounterStats";
 import { useNavigate } from "react-router-dom";
 
 export default function HeaderPage() {
   const [open, setOpen] = useState(false);
-
-  const [isAnimate, setisAnimate] = useState(false);
-  const Navigate = useNavigate();
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const navigate = useNavigate();
+  
   const headRef = useRef(null);
+  const imageRef = useRef(null);
 
   const stats = [
-    { value: 15, label: "Experienced Teachers", suffix: "+" },
-    { value: 200, label: "Guided Sessions", suffix: "+" },
-    { value: 98, label: "User Satisfaction", suffix: "%" },
+    { value: 15, label: "Expert Guides", suffix: "+" },
+    { value: 200, label: "Sessions", suffix: "+" },
+    { value: 98, label: "Peace Found", suffix: "%" },
   ];
 
   const AllTexts = [
@@ -25,219 +26,172 @@ export default function HeaderPage() {
     "Breathe deeply. Live mindfully.",
   ];
 
-  useEffect(() => {
-    setisAnimate(true);
-  }, []);
-
-  useEffect(() => {
-    if (isAnimate) {
-      gsap.fromTo(
-        headRef.current,
-        { y: 50, opacity: 0 }, // 👈 start: niche + invisible
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-      );
-    }
-  }, [isAnimate]);
-
   const navItems = [
-    { href: "#", label: "Home" },
+    { href: "/", label: "Home" },
     { href: "/FAQ", label: "About" },
     { href: "/MeditationAndExercise", label: "Exercise" },
-    { href: "#addjournals", label: "Add Journals" },
-    { href: "/WellnessCheck", label: "Wellness Check" },
-    {href:"/Dashboard",label:"Dashboard"},
-    {href:"/MoodJournal",label:"Mood Journal"},
+    { href: "/Dashboard", label: "Dashboard" },
+    { href: "/MoodJournal", label: "Journal" },
     { href: "/Contact", label: "Contact" }
-    // {href:"/AiAssitant",label:"AI Assistant"}
   ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br text-slate-900">
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
-      >
-        Skip to content
-      </a>
+  // Logic: Quotes cycle hona har 4 seconds mein
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTextIndex((prev) => (prev + 1) % AllTexts.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
-      <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-lg supports-[backdrop-filter]:bg-white/75 border-b border-slate-200/60 shadow-sm">
-        <nav
-          aria-label="Primary"
-          className="mx-auto flex bg-pink-700 h-20 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12"
-        >
-          <div className="flex bg-blue-900 items-center gap-3 animate-[slideInLeft_0.6s_ease-out]">
-            <div className="flex h-10 w-10 items-center justify-center ">
-              <Leaf className="h-5 w-5 text-slate-900" aria-hidden="true" />
+  // GSAP: Page load animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+      // Header entrance
+      tl.from(".nav-item", {
+        y: -30,
+        opacity: 0,
+        stagger: 0.05,
+        duration: 1,
+      })
+      // Hero content sliding up
+      .from(".hero-content > *", {
+        y: 40,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 1.2,
+      }, "-=0.6")
+      // Image scale in
+      .from(imageRef.current, {
+        scale: 0.9,
+        opacity: 0,
+        duration: 1.5,
+      }, "-=1");
+
+      // Floating effect for image (Continuous)
+      gsap.to(imageRef.current, {
+        y: 15,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#fcfdfd] text-slate-900 selection:bg-emerald-100">
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 w-full border-b border-slate-200/50 bg-white/80 backdrop-blur-xl">
+        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-12">
+          {/* Logo */}
+          <div className="nav-item flex items-center gap-2 group cursor-pointer" onClick={() => navigate("/")}>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 shadow-lg shadow-emerald-200 transition-transform group-hover:rotate-12">
+              <Leaf className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-slate-900">
+            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
               CalmNest
             </span>
           </div>
 
-          <div className="hidden  items-center gap-10 md:flex">
-            <ul className="flex items-center gap-8">
-              {navItems.map((item, index) => (
-                <li
-                  key={item.label}
-                  className="animate-[fadeInDown_0.6s_ease-out]"
-                  style={{ animationDelay: `${0.1 + index * 0.1}s` }}
-                >
-                  <a
-                    href={item.href}
-                    className="relative text-sm font-medium text-slate-600 transition-all duration-300 hover:text-slate-900 px-2 py-1"
-                  >
+          {/* Desktop Nav */}
+          <div className="hidden items-center gap-8 md:flex">
+            <ul className="flex items-center gap-6">
+              {navItems.map((item) => (
+                <li key={item.label} className="nav-item">
+                  <a href={item.href} className="text-sm font-medium text-slate-500 transition-colors hover:text-emerald-600">
                     {item.label}
                   </a>
                 </li>
               ))}
             </ul>
 
-            <button
-              onClick={() => window.open("/LobbyPage", "_blank")}
-              className="inline-flex items-center cursor-pointer justify-center rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 animate-[slideInRight_0.6s_ease-out]"
-            >
-              1:1 Expert Session
-            </button>
-            {/* ✅ Register Button */}
-            <button
-              onClick={() => Navigate("/RegisterPage")}
-              className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 backdrop-blur-sm animate-[slideInRight_0.6s_ease-out] cursor-pointer"
-            >
-              Register
-            </button>
+            <div className="flex items-center gap-4 nav-item">
+              <button onClick={() => navigate("/RegisterPage")} className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-all">
+                Login
+              </button>
+              <button onClick={() => window.open("/LobbyPage", "_blank")} className="rounded-full bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-200 transition-all hover:bg-emerald-700 hover:scale-105 active:scale-95">
+                Join Session
+              </button>
+            </div>
           </div>
 
-          <button
-            type="button"
-            aria-label="Toggle menu"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen((v) => !v)}
-            className="inline-flex items-center justify-center rounded-lg p-2.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 md:hidden transition-all duration-200"
-          >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {/* Mobile Toggle */}
+          <button onClick={() => setOpen(!open)} className="p-2 md:hidden text-slate-600">
+            {open ? <X size={28} /> : <Menu size={28} />}
           </button>
         </nav>
-
-        <div
-          id="mobile-menu"
-          className={`md:hidden transition-all duration-300 ease-out ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"} border-t border-slate-200 bg-white/95 backdrop-blur-lg`}
-        >
-          <div className="mx-auto max-w-7xl px-6 py-4 sm:px-8 lg:px-12">
-            <ul className="flex flex-col gap-2">
-              {navItems.map((item, index) => (
-                <li
-                  key={item.label}
-                  className="animate-[slideInLeft_0.4s_ease-out]"
-                  style={{ animationDelay: open ? `${index * 0.1}s` : "0s" }}
-                >
-                  <a
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-lg px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 transition-all duration-200"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-              <li className="pt-3">
-                <a
-                  href="#book"
-                  onClick={() => setOpen(false)}
-                  className="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
-                >
-                  Book a Session
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
       </header>
 
-      <main id="main">
-        <section className="relative overflow-hidden h-fit bg-tranparent">
-          <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-20 sm:px-8 md:py-9 lg:grid-cols-2 bg-transparent">
-            <div
-              className="order-2 max-w-2xl lg:order-1 bg-transparent"
-              ref={headRef}
-            >
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm">
-                <span
-                  className="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-slate-600 to-slate-800 animate-pulse"
-                  aria-hidden="true"
-                />
-                Meditation & Mindfulness
-              </div>
-              <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-6xl leading-tight">
-                Your Safe Space 
-                <br />
-                <span className="bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text text-transparent">
-                  for a Healthier Mind.
-                </span>
-              </h1>
-              <p
-                className={`mt-6 text-sm leading-8 text-slate-600 sm:text-xl max-w-xl`}
-              >
-                Explore guided meditation, track your emotional well-being, and connect with supportive resources designed for modern life.
-              </p>
-
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <button
-                  onClick={() => window.open("/LobbyPage", "_blank")}
-                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 cursor-pointer"
-                >
-                  Start a Free Session
-                </button>
-                <button
-                  onClick={() =>
-                    window.open("/MeditationAndExercise", "_blank")
-                  }
-                  className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-8 py-4 text-base font-semibold text-slate-900 shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 cursor-pointer focus-visible:ring-offset-2 backdrop-blur-sm"
-                >
-                  Mindfullness Exercise
-                </button>
-              </div>
-
-              <div className="mt-12 grid grid-cols-1 gap-6 text-center sm:grid-cols-3 sm:max-w-2xl">
-                {stats.map((stat, index) => (
-                  <CounterStats
-                    value={stat.value}
-                    label={stat.label}
-                    suffix={stat.suffix}
-                    index={stat.index}
-                  />
-                ))}
-              </div>
+      {/* Hero Section */}
+      <main className="mx-auto max-w-7xl px-6 pt-12 pb-24 lg:px-12">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+          
+          <div className="hero-content space-y-8" ref={headRef}>
+            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700 ring-1 ring-emerald-600/10 shadow-sm">
+              <Sparkles className="h-4 w-4 animate-pulse" />
+              <span>Personalized Mental Wellness</span>
             </div>
 
-            <div className="order-1 lg:order-2 animate-[slideInRight_0.8s_ease-out]">
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl transition-all duration-500 hover:shadow-2xl hover:scale-102">
-                <div className="aspect-[4/3] w-full">
-                  <img
-                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-                    width="880"
-                    height="640"
-                    alt="A calm meditation space with soft light and natural elements"
-                    className="h-full w-full object-cover transition-all duration-700 hover:scale-110"
-                    loading="eager"
-                  />
-                </div>
-                <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-slate-900/5 via-transparent to-white/10"
-                  aria-hidden="true"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-6">
-                  <p className="text-sm font-medium text-white/90">
-                    Transform your daily routine with mindfulness
-                  </p>
-                </div>
-              </div>
-              <p className="mt-4 text-center text-sm text-slate-500">
-                Real practice. Real calm. Begin in minutes.
+            <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 sm:text-7xl leading-[1.1]">
+              Your Safe Space <br />
+              <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent italic font-serif">for Mindfulness.</span>
+            </h1>
+
+            <div className="h-10">
+              <p className="text-xl font-medium text-slate-600 animate-in fade-in slide-in-from-bottom-2 duration-1000">
+                {AllTexts[currentTextIndex]}
               </p>
+            </div>
+
+            <p className="text-lg text-slate-500 max-w-lg leading-relaxed">
+              Experience the power of guided meditation and real-time support. We help you navigate daily stress with scientifically backed tools.
+            </p>
+
+            <div className="flex flex-wrap gap-4 pt-4">
+              <button className="group flex items-center gap-2 rounded-full bg-emerald-600 px-8 py-4 text-white font-bold shadow-xl shadow-emerald-100 transition-all hover:bg-emerald-700 hover:translate-y-[-2px]">
+                Start Free Journey
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </button>
+              <button className="rounded-full border border-slate-200 bg-white px-8 py-4 font-bold text-slate-600 transition-all hover:bg-slate-50 hover:border-slate-300">
+                Explore Exercises
+              </button>
+            </div>
+
+            {/* Stats - Staggered animations logic yahan hai */}
+            <div className="grid grid-cols-3 gap-4 pt-10 border-t border-slate-100">
+              {stats.map((stat, index) => (
+                <CounterStats
+                  key={stat.label}
+                  value={stat.value}
+                  label={stat.label}
+                  suffix={stat.suffix}
+                  index={index}
+                />
+              ))}
             </div>
           </div>
-        </section>
+
+          {/* Hero Image */}
+          <div className="relative" ref={imageRef}>
+            <div className="relative z-10 overflow-hidden rounded-[2.5rem] shadow-2xl ring-1 ring-slate-200">
+              <img
+                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80"
+                alt="Mindfulness Meditation"
+                className="aspect-[4/5] w-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent" />
+            </div>
+            
+            {/* Decorative Blurs */}
+            <div className="absolute -right-12 -top-12 h-64 w-64 rounded-full bg-emerald-100/50 blur-3xl" />
+            <div className="absolute -left-12 -bottom-12 h-64 w-64 rounded-full bg-blue-100/50 blur-3xl" />
+          </div>
+
+        </div>
       </main>
     </div>
   );

@@ -71,7 +71,7 @@ export default function Component() {
   }, []);
 
   return (
-    <div className="h-screen w-screen flex justify-center bg-gradient-to-br from-white via-blue-50 to-purple-50 relative overflow-hidden">
+    <div className="h-screen w-screen flex justify-center bg-gradient-to-br bg-[#F8FAFC] relative overflow-hidden">
 
       {/* background glow */}
       <div className="absolute w-[500px] h-[500px] bg-purple-200 blur-[120px] opacity-40 rounded-full top-[-100px] left-[-100px]" />
