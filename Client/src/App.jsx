@@ -33,6 +33,7 @@ import BlogTop from './Components/HarshBlog'
 import FAQ from './Components/FAQ'
 import MentalHealthQuestionnaire from './Components/MentalHealthQuestionnaire'
 import QuestionnaireLanding from './Components/QuestionnaireLanding'
+import MoodJournal from './Components/MoodJournal'
 
 function App() {
 
@@ -57,6 +58,7 @@ function App() {
       <Route path="/LobbyPage" element={<LobbyScreen/>}/>
       <Route path="/Docs" element={<Docs/>}/>
       <Route path="/Developer" element={<Developer/>}/>
+      <Route path="/MoodJournal" element={<MoodJournal/>}/>
       <Route path="/MeetingFeature" element={<MeetingFeature/>}/>
       <Route path="/Dashboard" element={<Dashboard/>}/>
       <Route path="/RegisterPage" element={<Register/>}/>
