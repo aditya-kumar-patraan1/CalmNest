@@ -31,6 +31,8 @@ import MeditationAndExercise from './Components/MeditationAndExercise'
 import ActualAnalyser from './Components/ActualAnalyser'
 import BlogTop from './Components/HarshBlog'
 import FAQ from './Components/FAQ'
+import MentalHealthQuestionnaire from './Components/MentalHealthQuestionnaire'
+import QuestionnaireLanding from './Components/QuestionnaireLanding'
 
 function App() {
 
@@ -38,7 +40,9 @@ function App() {
     <>
     <Routes>
       <Route element={<CompletePage/>} path="/"/>
+      <Route element={<MentalHealthQuestionnaire/>} path="/MentalHealthQuestionnaire"/>
       <Route element={<Navbar/>} path={"/Navbar"}/>
+      <Route element={<QuestionnaireLanding/>} path="/QuestionnaireLanding"/>
       <Route element={<About/>} path={"/About"}/>
       <Route element={<Contact/>} path={"/Contact"}/>
       <Route element={<AIHealthAssistant/>} path={"/AIHealthAssistant"}/>

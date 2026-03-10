@@ -63,9 +63,9 @@ export default function HeaderPage() {
       <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-lg supports-[backdrop-filter]:bg-white/75 border-b border-slate-200/60 shadow-sm">
         <nav
           aria-label="Primary"
-          className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12"
+          className="mx-auto flex bg-pink-700 h-20 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12"
         >
-          <div className="flex items-center gap-3 animate-[slideInLeft_0.6s_ease-out]">
+          <div className="flex bg-blue-900 items-center gap-3 animate-[slideInLeft_0.6s_ease-out]">
             <div className="flex h-10 w-10 items-center justify-center ">
               <Leaf className="h-5 w-5 text-slate-900" aria-hidden="true" />
             </div>
@@ -74,7 +74,7 @@ export default function HeaderPage() {
             </span>
           </div>
 
-          <div className="hidden items-center gap-10 md:flex">
+          <div className="hidden  items-center gap-10 md:flex">
             <ul className="flex items-center gap-8">
               {navItems.map((item, index) => (
                 <li
@@ -168,7 +168,7 @@ export default function HeaderPage() {
                 />
                 Meditation & Mindfulness
               </div>
-              <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+              <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-6xl leading-tight">
                 Your Safe Space 
                 <br />
                 <span className="bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text text-transparent">
@@ -176,7 +176,7 @@ export default function HeaderPage() {
                 </span>
               </h1>
               <p
-                className={`mt-6 text-lg leading-8 text-slate-600 sm:text-xl max-w-xl`}
+                className={`mt-6 text-sm leading-8 text-slate-600 sm:text-xl max-w-xl`}
               >
                 Explore guided meditation, track your emotional well-being, and connect with supportive resources designed for modern life.
               </p>

@@ -78,7 +78,7 @@ const Navbar = () => {
 
       {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-blue-900 text-white z-50 flex flex-col gap-4 px-6 py-6 shadow-xl md:hidden">
+        <div className="absolute top-full left-0 w-full bg-blue-900 text-white z-50 flex flex-col gap-4 px-6 py-6 shadow-xl  md:hidden">
           {menuItems.map((item) => (
             <p
               key={item}
