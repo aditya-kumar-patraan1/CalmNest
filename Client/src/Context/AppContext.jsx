@@ -58,13 +58,13 @@ export const AppProvider = (props) => {
   const getUserData = async () => {
     try {
       const response = await axios.get(
-        `${BACKEND_URL}/api/userData/getUserData`,
+        `${BACKEND_URL}/api/v2/getUserData`,
         {
           withCredentials: true,
         }
       );
 
-      if (response.data.status === 1) {
+      if (response.data.status == 1) {
         // console.log("User Data:", response.data.userData);
         setUserData(response.data.userData);
       } else {

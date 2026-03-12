@@ -6,9 +6,10 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 const app = express();
+
 dotenv.config();
 
-const LOCALHOST=process.env.LOCALHOST || 3000;
+const LOCALHOST=process.env.LOCALHOST || 8000;
 dbConnect();
 app.use(express.json())
 app.use(cookieParser())
@@ -17,9 +18,13 @@ app.use(cors({
     credentials:true
 }))
 
+app.get("/healthCheck", (req, res) => {
+    res.json({ message: "I am working well" });
+});
+
 //middleware+cookie-parser+cors then routes
 app.use("/api",router);
 
 app.listen(LOCALHOST,(req,res)=>{
-    console.log("App is running...");
+    console.log(`App is running... on localhost : ${LOCALHOST}`);
 })

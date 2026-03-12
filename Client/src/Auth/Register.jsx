@@ -15,8 +15,10 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   async function saveToMongo(){
+    console.log(formData);
     const result = await axios.post(`${BACKEND_URL}/api/v1/register`,formData)
     return result.data;
   }
@@ -32,6 +34,7 @@ const Register = () => {
       console.log(res);
       if(res.status === 1){
         toast.success("User registered");
+        navigate("/LoginPage");
       }
       else{
         throw new Error();

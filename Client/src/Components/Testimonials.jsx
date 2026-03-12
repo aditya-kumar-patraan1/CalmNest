@@ -12,8 +12,7 @@ const FeedbackSlider = () => {
         { id: 1, message: "CalmNest has truly changed my mornings. The guided meditations help me start each day with calm and clarity.", name: "John Doe", rating: 3 },
         { id: 2, message: "I love the combination of mindfulness and reflection. The journaling section especially helps me track my growth.", name: "Ivy Clark", rating: 4 },
         { id: 3, message: "CalmNest has helped me create a small daily ritual that keeps me grounded no matter how hectic life gets.", name: "Hank Martin", rating: 4 },
-        { id: 4, message: "The breathing exercises taught here have reduced my stress levels significantly. I feel more balanced every day.", name: "Alice Johnson", rating: 3 },
-        // ... add others as needed
+        { id: 4, message: "The breathing exercises taught here have reduced my stress levels significantly. I feel more balanced every day.", name: "Alice Johnson", rating: 3 }
     ];
 
     const infiniteFeedbacks = [...feedbacks, ...feedbacks, ...feedbacks];

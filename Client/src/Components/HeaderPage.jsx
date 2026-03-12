@@ -110,7 +110,7 @@ export default function HeaderPage() {
             </ul>
 
             <div className="flex items-center gap-4 nav-item">
-              <button onClick={() => navigate("/RegisterPage")} className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-all">
+              <button onClick={() => navigate("/LoginPage")} className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-all">
                 Login
               </button>
               <button onClick={() => window.open("/LobbyPage", "_blank")} className="rounded-full bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-200 transition-all hover:bg-emerald-700 hover:scale-105 active:scale-95">

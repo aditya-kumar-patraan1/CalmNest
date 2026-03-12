@@ -1,15 +1,13 @@
-const userauth = async (req,res) => {
+const userauth = async (req,res,next) => {
     try{
 
-        const id = req.cookie.get; 
-
-        if(!req.body) req.body = {};
-        req.body.userId = id;
+        console.log(req.cookie);
 
         return res.send({
             status:1,
-            msg:"user is authenticated"
+            msg:"credential matched"
         });
+
     }
     catch(e){
         return res.send({
