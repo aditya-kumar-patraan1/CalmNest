@@ -175,7 +175,7 @@ export default function MoodJournal() {
              <span className="px-3 py-1 bg-slate-200 text-slate-600 text-[10px] font-bold rounded-full">{savedEntries?.length || 0} Entries</span>
           </div>
 
-          <div className="h-[calc(100vh-130px)] overflow-y-auto pr-2 custom-scrollbar space-y-4">
+          <div className="h-[calc(100vh-212px)] overflow-y-auto pr-2 custom-scrollbar space-y-4">
             <AnimatePresence mode="popLayout">
               {savedEntries?.length === 0 ? (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20 bg-white rounded-[3rem] border border-dashed border-slate-200">
