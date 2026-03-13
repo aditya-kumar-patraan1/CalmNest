@@ -12,6 +12,7 @@ export const AppProvider = (props) => {
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
   const [table, setTable] = useState([]);
+  const [savedEntries,setSavedEntries] = useState([]);
 
   // const getAuthState = async () => {
   //   try {
@@ -77,10 +78,31 @@ export const AppProvider = (props) => {
     }
   };
 
+  const getSavedEntries = async () => {
+    try{
+      
+      const result = await axios.get(`${BACKEND_URL}/api/v3/getMoodEntries`,{
+        withCredentials : true
+      });
+
+      if(result.data.status == 1){
+        setSavedEntries(result.data.allMoodEntries);
+      }
+      else{
+        throw new Error();
+      }  
+      
+    }
+    catch(e){
+      setSavedEntries([]);
+    }
+  }
+
   useEffect(() => {
     console.log("called");
     // getAuthState();
     getUserData();
+    getSavedEntries();
   }, [isLoggedIn]);
 
   const value = {
@@ -94,6 +116,8 @@ export const AppProvider = (props) => {
     table,
     setTable,
     getTable,
+    savedEntries,
+    setSavedEntries
   };
 
   return (

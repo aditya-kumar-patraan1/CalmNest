@@ -5,6 +5,7 @@ import {router} from "./Routers/authRouters.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { userRouter } from "./Routers/UserDataRouters.js";
+import { moodJournalRouter } from "./Routers/moodJournalRouters.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cors({
 //middleware+cookie-parser+cors then routes
 app.use("/api/v1",router);
 app.use("/api/v2",userRouter);
+app.use("/api/v3",moodJournalRouter);
 
 app.get("/healthCheck", (req, res) => {
     res.json({ message: "I am working well" });
