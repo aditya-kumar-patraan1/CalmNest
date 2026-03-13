@@ -91,7 +91,7 @@ export const AppProvider = (props) => {
       else{
         throw new Error();
       }  
-      
+
     }
     catch(e){
       setSavedEntries([]);
@@ -117,7 +117,8 @@ export const AppProvider = (props) => {
     setTable,
     getTable,
     savedEntries,
-    setSavedEntries
+    setSavedEntries,
+    getSavedEntries
   };
 
   return (
