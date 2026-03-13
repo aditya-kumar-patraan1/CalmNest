@@ -28,9 +28,9 @@ const Login = () => {
         setFormdata({ email: "", password: "" });
         Navigate("/RegisterPage");
       } else {
-        toast.success("Welcome back to your safe space!");
-        getUserData();
+        toast.success("User Logged in successfully !");
         setisLoggedIn(true);
+        getUserData();
         Navigate("/");
       }
     } catch (error) {
@@ -134,9 +134,9 @@ const Login = () => {
                 <label className="text-xs font-black text-slate-400 uppercase tracking-widest">
                   Password
                 </label>
-                <button type="button" className="text-xs font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
+                {/* <button type="button" className="text-xs font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
                   Forgot?
-                </button>
+                </button> */}
               </div>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">

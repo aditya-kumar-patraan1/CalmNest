@@ -13,28 +13,28 @@ export const AppProvider = (props) => {
   const [userData, setUserData] = useState(null);
   const [table, setTable] = useState([]);
 
-  const getAuthState = async () => {
-    try {
+  // const getAuthState = async () => {
+  //   try {
       // console.log("Checking authentication state...");
-      const response = await axios.get(
-        `${BACKEND_URL}/api/auth/isAuthenticated`,
-        {
-          withCredentials: true,
-        }
-      );
-      if (response.data.success === true) {
-        setisLoggedIn(true);
-        getUserData();
-        getTable();
+  //     const response = await axios.get(
+  //       `${BACKEND_URL}/api/auth/isAuthenticated`,
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     if (response.data.success === true) {
+  //       setisLoggedIn(true);
+  //       getUserData();
+  //       getTable();
 
-      } else {
-        setisLoggedIn(false);
-      }
-    } catch (e) {
-      // console.log("Error fetching authentication state:", e);
-      setisLoggedIn(false);
-    }
-  };
+  //     } else {
+  //       setisLoggedIn(false);
+  //     }
+  //   } catch (e) {
+  //     // console.log("Error fetching authentication state:", e);
+  //     setisLoggedIn(false);
+  //   }
+  // };
 
   const getTable = async () => {
     try {
@@ -65,10 +65,12 @@ export const AppProvider = (props) => {
       );
 
       if (response.data.status == 1) {
-        // console.log("User Data:", response.data.userData);
+        console.log("User Data:", response.data.userData);
         setUserData(response.data.userData);
+        setisLoggedIn(true);
       } else {
-        setUserData(false);
+        setUserData(null);
+        setisLoggedIn(false);
       }
     } catch (e) {
       // console.log("Error fetching user data:", e);
@@ -76,8 +78,10 @@ export const AppProvider = (props) => {
   };
 
   useEffect(() => {
-    getAuthState();
-  }, []);
+    console.log("called");
+    // getAuthState();
+    getUserData();
+  }, [isLoggedIn]);
 
   const value = {
     BACKEND_URL,
@@ -86,7 +90,7 @@ export const AppProvider = (props) => {
     userData,
     setUserData,
     getUserData,
-    getAuthState,
+    // getAuthState,
     table,
     setTable,
     getTable,

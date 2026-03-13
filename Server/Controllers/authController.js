@@ -107,18 +107,38 @@ const loginUser = async (req,res) => {
     }
 }
 
+// const logoutUser = async (req,res) => {
+//     try{
 
-const testing = async (req,res) => {
+//     }
+//     catch(e){
+//         return res.send({
+//             status:0,
+//             "msg":"error occured"
+//         })       
+//     }
+// }
+
+const logoutUser = async (req,res) => {
     try{
-        console.log(req.cookie);
+
+        //clear the cookie
+        res.clearCookie("calmnestToken",{
+            httpOnly : true,
+            secure : true,
+            sameSite : 'None',
+        });
+
+        return res.send({
+            status:1
+        })
 
     }
     catch(e){
         return res.send({
-            status : 0,
-            msg:`error occured : ${e}`
-        })
+            status:0,
+            "msg":"error occured"
+        })       
     }
 }
-
-export {registerUser,loginUser,testing};
+export {registerUser,loginUser,logoutUser};

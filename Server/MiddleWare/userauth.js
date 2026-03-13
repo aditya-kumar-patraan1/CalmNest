@@ -1,21 +1,31 @@
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const userauth = async (req,res,next) => {
     try{
 
-        console.log(req.cookie);
+        const {calmnestToken}  = req.cookies;
 
-        return res.send({
-            status:1,
-            msg:"credential matched"
-        });
+        if (!calmnestToken) {
+            return res.status(401).send({
+                status: 0,
+                msg: "No token provided"
+            });
+        }
 
+        //decoding the token
+        const payload = jwt.verify(calmnestToken,process.env.JWT_SECRET);
+        req.userId = payload.id; 
+        next();
     }
     catch(e){
         return res.send({
-            status:0,
-            msg:"credential not matched"
+            status: 0,
+            msg: "credential not matched"
         });
     }
-    next();
 }
 
-export default  userauth;
+export {userauth};

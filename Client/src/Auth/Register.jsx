@@ -1,142 +1,208 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
-import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { User, Mail, Lock, Eye, EyeOff, ArrowRight, Loader2, Leaf, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 import { useAppContext } from "../Context/AppContext";
-import BackgroundTemplate from "../assets/BackgroundTemplate.png";
 
 const Register = () => {
-  const Navigate = useNavigate();
-  const { setisLoggedIn, isLoggedIn, userData, getUserData } = useAppContext();
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-  const [formData, setFormdata] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
   const navigate = useNavigate();
+  const { setisLoggedIn, BACKEND_URL } = useAppContext();
+  
+  const [formData, setFormdata] = useState({ name: "", email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  async function saveToMongo(){
-    console.log(formData);
-    const result = await axios.post(`${BACKEND_URL}/api/v1/register`,formData)
-    return result.data;
-  }
+  const handleChange = (e) => {
+    setFormdata({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password || !formData.name) {
-      toast.error(`Please fill all details.`);
+      return toast.error("Please fill all details.");
     }
 
-    try{
-      const res = await saveToMongo();
-      console.log(res);
-      if(res.status === 1){
-        toast.success("User registered");
-        navigate("/LoginPage");
+    setIsLoading(true);
+    try {
+      const res = await axios.post(`${BACKEND_URL}/api/v1/register`, formData);
+      if (res.data.status === 1) {
+        toast.success("Welcome to the family! Redirecting...");
+        setTimeout(() => navigate("/LoginPage"), 2000);
+      } else {
+        toast.error(res.data.message || "Registration failed.");
       }
-      else{
-        throw new Error();
-      }
-    } 
-    catch(e){
-      toast.error("User not registered");
+    } catch (err) {
+      toast.error("Something went wrong. Try again later.");
+    } finally {
+      setIsLoading(false);
     }
-  }
-
-  function handleChange(e) {
-    setFormdata({ ...formData, [e.target.name]: e.target.value });
-  }
-
-  useEffect(() => {}, [formData]);
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-10 bg-gray-50 relative">
-      <img src={BackgroundTemplate} className="absolute top-0 left-0 h-full w-full"/>
-      <div className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-xl shadow-lg p-6 sm:p-8 md:p-10 bg-white z-40">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center mb-6 sm:mb-8 text-gray-900">
-          Create Your Account
-        </h2>
+    <div className="flex min-h-screen bg-white">
+      <Toaster position="top-right" />
 
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          {/* Name */}
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700">
-              Name
-            </label>
-            <div className="relative">
-              <FiUser className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
-              <input
-                id="name"
-                name="name"
-                type="text"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Enter your name"
-                className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
-              />
+      {/* --- Left Side: Form --- */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 md:p-20 bg-slate-50/50">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-md"
+        >
+          <div className="mb-10">
+            <div className="lg:hidden flex items-center gap-2 mb-8 text-emerald-700">
+               <Leaf className="w-8 h-8" />
+               <span className="text-xl font-bold">CalmNest</span>
             </div>
+            <h1 className="text-4xl font-black text-slate-900 mb-3 tracking-tight">Create Account</h1>
+            <p className="text-slate-500 font-medium">Join us on your journey to mindfulness.</p>
           </div>
 
-          {/* Email */}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
-              Email
-            </label>
-            <div className="relative">
-              <FiMail className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-                className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
-              />
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            {/* Name Field */}
+            <div className="space-y-2">
+              <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">
+                Full Name
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <User className="h-5 w-5 text-slate-400 group-focus-within:text-emerald-600 transition-colors" />
+                </div>
+                <input
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="John Doe"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-emerald-500/5 focus:border-emerald-500 transition-all text-slate-900 placeholder:text-slate-300"
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Password */}
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-2 text-gray-700">
-              Password
-            </label>
-            <div className="relative">
-              <FiLock className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
-              <input
-                id="password"
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Create a password"
-                className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
-              />
+            {/* Email Field */}
+            <div className="space-y-2">
+              <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">
+                Email Address
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-slate-400 group-focus-within:text-emerald-600 transition-colors" />
+                </div>
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="hello@calmnest.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-emerald-500/5 focus:border-emerald-500 transition-all text-slate-900 placeholder:text-slate-300"
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
+            {/* Password Field */}
+            <div className="space-y-2">
+              <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">
+                Password
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-slate-400 group-focus-within:text-emerald-600 transition-colors" />
+                </div>
+                <input
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  placeholder="••••••••"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full pl-12 pr-12 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-emerald-500/5 focus:border-emerald-500 transition-all text-slate-900 placeholder:text-slate-300"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-emerald-600 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+            </div>
+
+            {/* Submit Button */}
             <button
               type="submit"
-              className="w-full sm:w-auto px-6 py-3 rounded-lg font-medium text-white bg-gray-900 hover:bg-gray-800 transition cursor-pointer"
+              disabled={isLoading}
+              className="w-full group bg-slate-900 text-white py-4 rounded-2xl font-bold text-lg shadow-xl shadow-slate-200 hover:bg-emerald-700 hover:translate-y-[-2px] transition-all flex items-center justify-center gap-3 disabled:bg-slate-300 disabled:translate-y-0"
             >
-              Register
+              {isLoading ? (
+                <Loader2 className="w-6 h-6 animate-spin" />
+              ) : (
+                <>
+                  Create Account
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
             </button>
+          </form>
 
+          <p className="mt-10 text-center text-slate-500 font-medium">
+            Already have an account?{" "}
             <button
-              type="button"
-              className="text-sm text-gray-600 hover:underline cursor-pointer"
-              onClick={() => Navigate("/LoginPage")}
+              onClick={() => navigate("/LoginPage")}
+              className="text-emerald-600 font-bold hover:text-emerald-700 transition-colors underline-offset-4 hover:underline"
             >
-              Already have an account?
+              Sign in
             </button>
-          </div>
-        </form>
+          </p>
+        </motion.div>
+      </div>
 
-        <Toaster />
+      {/* --- Right Side: Branding (Visible on Desktop) --- */}
+      <div className="hidden lg:flex w-1/2 relative bg-slate-900 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1500&q=80" 
+            className="h-full w-full object-cover opacity-30 mix-blend-overlay"
+            alt="Mindfulness Workspace"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/80 via-slate-900/90 to-slate-900" />
+        </div>
+
+        <div className="relative z-10 flex flex-col justify-between p-16 w-full">
+          <div className="flex items-center gap-2 text-white">
+            <div className="bg-white/10 backdrop-blur-md p-2 rounded-xl border border-white/20">
+              <Leaf className="w-8 h-8 text-emerald-400" />
+            </div>
+            <span className="text-2xl font-bold tracking-tight">CalmNest</span>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6"
+          >
+            <div className="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+              <Sparkles size={14} /> Start Your Journey
+            </div>
+            <h2 className="text-5xl font-bold text-white leading-tight">
+              Design a better <br />
+              <span className="text-emerald-400 italic">version of you.</span>
+            </h2>
+            <p className="text-slate-300 text-lg max-w-md leading-relaxed">
+              "Your mental health is a priority. Your happiness is an essential. Your self-care is a necessity."
+            </p>
+          </motion.div>
+
+          <div className="flex items-center gap-6 text-slate-500 text-sm font-medium">
+            <span className="hover:text-white cursor-pointer transition-colors">Privacy</span>
+            <span className="hover:text-white cursor-pointer transition-colors">Terms</span>
+            <span className="hover:text-white cursor-pointer transition-colors">Support</span>
+          </div>
+        </div>
       </div>
     </div>
   );
