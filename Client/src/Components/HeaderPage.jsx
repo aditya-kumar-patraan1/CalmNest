@@ -53,7 +53,7 @@ export default function HeaderPage() {
     { href: "/", label: "Home" },
     { href: "/FAQ", label: "About" },
     { href: "/MeditationAndExercise", label: "Exercise" },
-    { href: "/Dashboard", label: "Dashboard" },
+    { href: "/MentalHealthDashboard", label: "Dashboard" },
     { href: "/MoodJournal", label: "Mood Journal" },
     { href: "/Contact", label: "Contact" },
   ];

@@ -34,12 +34,14 @@ import FAQ from './Components/FAQ'
 import MentalHealthQuestionnaire from './Components/MentalHealthQuestionnaire'
 import QuestionnaireLanding from './Components/QuestionnaireLanding'
 import MoodJournal from './Components/MoodJournal'
+import MentalHealthDashboard from './Components/MentalHealthDashboard'
 
 function App() {
 
   return (
     <>
     <Routes>
+      <Route element={<MentalHealthDashboard/>} path={"/MentalHealthDashboard"}/>
       <Route element={<CompletePage/>} path="/"/>
       <Route element={<MentalHealthQuestionnaire/>} path="/MentalHealthQuestionnaire"/>
       <Route element={<Navbar/>} path={"/Navbar"}/>
