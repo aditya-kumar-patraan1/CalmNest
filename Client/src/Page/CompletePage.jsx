@@ -21,6 +21,8 @@ import BenefitsSection from '../Components/Section_Benefits'
 import Footer2 from '../Components/Footer2'
 import Login from '../Auth/Login'
 import Register from '../Auth/Register'
+import { Bubble } from 'react-chartjs-2'
+import ChatOrBubble from '../Chatbot/ChatOrBubble'
 
 const CompletePage = () => {
   return (
@@ -38,6 +40,7 @@ const CompletePage = () => {
     <Footer/> */}
     {/* <Login/> */}
     <HeaderPage/>
+    <ChatOrBubble/>
     {/* <QuestionnaireLanding/> */}
     <BannerForMeditation/>
     <SliderComponent/>
