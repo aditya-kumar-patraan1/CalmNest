@@ -94,7 +94,7 @@ const FAQ = () => {
               Can't find the answer you're looking for? Our soul-support team is always ready to help you center yourself.
             </p>
 
-            <button className="group flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold transition-all hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-100 active:scale-95">
+            <button className="group flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold transition-all hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-100 active:scale-95 cursor-pointer">
               <MessageCircle size={20} className="group-hover:rotate-12 transition-transform" />
               Chat with an Expert
             </button>
@@ -146,7 +146,7 @@ const FAQ = () => {
                 <h4 className="text-xl font-bold mb-2">Still have questions?</h4>
                 <p className="text-emerald-100/70">Our dedicated support is available 24/7.</p>
               </div>
-              <button className="relative z-10 bg-white text-emerald-900 px-6 py-3 rounded-xl font-bold hover:bg-emerald-50 transition-colors" onClick={()=>navigate("/Contact")}>
+              <button className="relative z-10 bg-white text-emerald-900 px-6 py-3 rounded-xl font-bold hover:bg-emerald-50 transition-colors cursor-pointer" onClick={()=>navigate("/Contact")}>
                 Contact Us
               </button>
               <HelpCircle className="absolute -right-4 -bottom-4 w-32 h-32 text-white/5 rotate-12" />
