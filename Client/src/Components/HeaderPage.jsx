@@ -139,12 +139,12 @@ export default function HeaderPage() {
               <ul className="flex items-center gap-6">
                 {navItems.map((item) => (
                   <li key={item.label} className="nav-item">
-                    <a
-                      onClick={navigate(item.href)}
+                    <button
+                      onClick={()=>navigate(item.href)}
                       className="text-sm font-medium text-slate-500 transition-colors hover:text-emerald-600"
                     >
                       {item.label}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
