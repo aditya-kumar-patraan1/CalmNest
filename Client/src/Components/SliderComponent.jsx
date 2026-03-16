@@ -10,7 +10,7 @@ import blogtop4 from "../assets/blogtop4.jpeg";
 import god_meditation from "../assets/god_meditation.png";
 import mountain from "../assets/mountain.png";
 import relaxation from "../assets/relaxation.png";
-import Peace from "../assets/Peace.png";
+import Peace from "../assets/peace.png";
 import yoga from "../assets/yoga.png";
 import stress from "../assets/stress.png";
 import attentive from "../assets/attentive.png";
