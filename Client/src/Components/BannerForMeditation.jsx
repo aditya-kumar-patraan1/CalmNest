@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-import PreaceFulYogaImage from "../assets/PeacefulYogaImage.png";
+import PeaceFulYogaImage from "../assets/PeacefulYogaImage.png";
 import BookReadingImage from "../assets/BookReadingImage.png";
 
 const BannerForMeditation = () => {
@@ -15,7 +15,7 @@ const BannerForMeditation = () => {
       heading: "Connect with Experts Nearby for Your Well-Being",
       description:
         "Get guidance from trusted professionals around you — whether it’s a doctor, therapist, or wellness expert.",
-      image: PreaceFulYogaImage,
+      image: PeaceFulYogaImage,
       url: "/LocationTracker",
     },
     {
