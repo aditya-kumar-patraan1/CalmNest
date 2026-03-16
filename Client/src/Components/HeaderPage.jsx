@@ -49,6 +49,7 @@ export default function HeaderPage() {
     "Breathe deeply. Live mindfully.",
   ];
 
+
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/FAQ", label: "About" },
@@ -139,7 +140,7 @@ export default function HeaderPage() {
                 {navItems.map((item) => (
                   <li key={item.label} className="nav-item">
                     <a
-                      href={item.href}
+                      onClick={navigate(item.href)}
                       className="text-sm font-medium text-slate-500 transition-colors hover:text-emerald-600"
                     >
                       {item.label}
