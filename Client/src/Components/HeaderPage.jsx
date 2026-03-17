@@ -141,7 +141,7 @@ export default function HeaderPage() {
                   <li key={item.label} className="nav-item">
                     <button
                       onClick={()=>navigate(item.href)}
-                      className="text-sm font-medium text-slate-500 transition-colors hover:text-emerald-600"
+                      className="text-sm cursor-pointer font-medium text-slate-500 transition-colors hover:text-emerald-600"
                     >
                       {item.label}
                     </button>
@@ -152,7 +152,7 @@ export default function HeaderPage() {
               <div className="flex items-center gap-4 nav-item">
                 <button
                   onClick={() => navigate("/LoginPage")}
-                  className={`${isLoggedIn ? "hidden" : "block"} px-4 py-2 text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-all`}
+                  className={`${isLoggedIn ? "hidden" : "block"} px-4 py-2 text-sm font-semibold text-slate-600 cursor-pointer hover:text-emerald-600 transition-all`}
                 >
                   Login
                 </button>
@@ -164,13 +164,13 @@ export default function HeaderPage() {
                 </button>
                 <button
                   onClick={() => window.open("/LobbyPage", "_blank")}
-                  className={`rounded-full bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-200 transition-all hover:bg-emerald-700 hover:scale-105 active:scale-95 ${!isLoggedIn?"hidden":"block"}`}
+                  className={`rounded-full bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-200 transition-all hover:bg-emerald-700 hover:scale-105 active:scale-95 cursor-pointer ${!isLoggedIn?"hidden":"block"}`}
                 >
                   Join Session
                 </button>
                 <button
                   onClick={() => navigate("/RegisterPage")}
-                  className={`rounded-full bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-200 transition-all hover:bg-emerald-700 hover:scale-105 active:scale-95 ${isLoggedIn?"hidden":"block"} `}
+                  className={`rounded-full bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-200 transition-all hover:bg-emerald-700 hover:scale-105 active:scale-95 cursor-pointer ${isLoggedIn?"hidden":"block"} `}
                 >
                   Register
                 </button>
@@ -216,11 +216,11 @@ export default function HeaderPage() {
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <button className="group flex items-center gap-2 rounded-full bg-emerald-600 px-8 py-4 text-white font-bold shadow-xl shadow-emerald-100 transition-all hover:bg-emerald-700 hover:translate-y-[-2px]">
+                <button className="group flex items-center gap-2 rounded-full bg-emerald-600 px-8 py-4 text-white font-bold shadow-xl shadow-emerald-100 transition-all hover:bg-emerald-700 cursor-pointer hover:translate-y-[-2px]">
                   Start Free Journey
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </button>
-                <button className="rounded-full border border-slate-200 bg-white px-8 py-4 font-bold text-slate-600 transition-all hover:bg-slate-50 hover:border-slate-300">
+                <button onClick={()=>navigate("/MeditationAndExercise")} className="rounded-full border border-slate-200 bg-white px-8 py-4 font-bold text-slate-600 transition-all cursor-pointer hover:bg-slate-50 hover:border-slate-300">
                   Explore Exercises
                 </button>
               </div>
