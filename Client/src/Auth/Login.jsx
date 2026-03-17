@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Loader2, Sparkles, Leaf } from "lucide-react";
-import { motion } from "framer-motion";
+import { Mail, Info, Lock, Eye, EyeOff, ArrowRight, Loader2, Sparkles, Leaf } from "lucide-react";
+import { motion  } from "framer-motion";
 import { useAppContext } from "../Context/AppContext";
 
 const Login = () => {
@@ -165,6 +165,13 @@ const Login = () => {
             <div className="flex items-center gap-2 px-1">
               <input type="checkbox" id="remember" className="w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" />
               <label htmlFor="remember" className="text-sm text-slate-500 font-medium select-none">Remember me for 30 days</label>
+            </div>
+
+            <div className="flex justify-center ">
+              <span className="text-sm font-light text-[12px] text-[#90A1B9] flex gap-2 items-center">
+                <Info size={11}/>
+                <span>Demo : Email: honeysingh123@gmail.com, Password: honeysingh123</span>
+              </span>
             </div>
 
             {/* Submit Button */}
