@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Line, Doughnut, Bar } from "react-chartjs-2";
+import {motion,AnimatePresence} from "framer-motion";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -20,6 +21,9 @@ import {
   FiMoon,
   FiTrendingUp,
   FiInfo,
+  FiX,
+  FiCheckCircle,
+  FiZap,
   FiMessageCircle,
   FiCpu,
   FiWind,
@@ -42,6 +46,7 @@ ChartJS.register(
 const MentalHealthDashboard = () => {
   const { userData: user, savedEntries } = useAppContext();
   const navigate = useNavigate();
+  const [isAISuggestionOpen, setisAISuggestionOpen] = useState(false);
 
   // Stats Logic
   const totalEntries = savedEntries?.length || 0;
@@ -61,19 +66,18 @@ const MentalHealthDashboard = () => {
 
   // console.log(allDates);
 
-  const avgForEachDay = savedEntries?.reduce((acc,entry)=>{
-    
-    const myDate = new Date(entry.createdAt).toISOString().split('T')[0];
+  const avgForEachDay = savedEntries?.reduce((acc, entry) => {
+    const myDate = new Date(entry.createdAt).toISOString().split("T")[0];
 
-    if(!acc[myDate]){
-      acc[myDate] = {sum:0,count:0};
+    if (!acc[myDate]) {
+      acc[myDate] = { sum: 0, count: 0 };
     }
 
     acc[myDate].sum += entry.intensity_level;
     acc[myDate].count++;
-    
+
     return acc;
-  },{});
+  }, {});
 
   const initialMoods = {
     happy: 0,
@@ -106,7 +110,9 @@ const MentalHealthDashboard = () => {
     datasets: [
       {
         label: "Mood Level",
-        data: Object.entries(avgForEachDay).map((entry)=>{ return (entry[1].sum/entry[1].count).toFixed(1)}) || [0],
+        data: Object.entries(avgForEachDay).map((entry) => {
+          return (entry[1].sum / entry[1].count).toFixed(1);
+        }) || [0],
         borderColor: "rgba(79, 70, 229, 1)",
         backgroundColor: "rgba(79, 70, 229, 0.2)",
         fill: true,
@@ -215,6 +221,61 @@ const MentalHealthDashboard = () => {
           ))}
         </div>
 
+        {/* --- AI ANALYSIS MODAL --- */}
+      <AnimatePresence>
+        {isAISuggestionOpen && (
+          <div className="fixed inset-0 z-[100] flex justify-center items-center p-4">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setisAISuggestionOpen(false)} className="absolute inset-0 bg-slate-900/60 backdrop-blur-md" />
+            <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 20 }} className="relative bg-white w-full max-w-3xl max-h-[90vh] rounded-[3rem] shadow-2xl overflow-hidden flex flex-col">
+              {/* Modal Header */}
+              <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-indigo-50/30">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-indigo-600 rounded-2xl text-white shadow-lg shadow-indigo-200"><FiCpu size={24} /></div>
+                  <div>
+                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">Emotional Intelligence Report</h3>
+                    <p className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Powered by CalmNest Core</p>
+                  </div>
+                </div>
+                <button onClick={() => setisAISuggestionOpen(false)} className="p-3 bg-white border border-slate-200 text-slate-400 rounded-2xl hover:text-red-500 transition-colors"><FiX size={20} /></button>
+              </div>
+
+              {/* Modal Body */}
+              <div className="flex-1 overflow-y-auto p-8 space-y-8 hide-scrollbar">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="p-6 bg-emerald-50 rounded-[2rem] border border-emerald-100">
+                    <h4 className="flex items-center gap-2 font-black text-emerald-700 uppercase text-xs tracking-widest mb-4"> <FiCheckCircle /> Primary Strength</h4>
+                    <p className="text-slate-700 font-medium leading-relaxed">Your "Stability Index" has improved by 14% this week. You are successfully managing stress during mid-week spikes.</p>
+                  </div>
+                  <div className="p-6 bg-amber-50 rounded-[2rem] border border-amber-100">
+                    <h4 className="flex items-center gap-2 font-black text-amber-700 uppercase text-xs tracking-widest mb-4"> <FiZap /> Action Recommended</h4>
+                    <p className="text-slate-700 font-medium leading-relaxed">We noticed a slight dip in mood when entries are logged after 10 PM. Consider starting your 5-min meditation earlier.</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h4 className="text-sm font-black text-slate-400 uppercase tracking-widest px-2">Key Discoveries</h4>
+                  {[
+                    "Mindfulness sessions directly correlate with 'Grateful' mood states.",
+                    "Exercise entries show a 1.5x increase in focus intensity.",
+                    "Your emotional vocabulary has expanded by 3 new keywords this month."
+                  ].map((note, i) => (
+                    <div key={i} className="flex items-start gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 transition-hover hover:bg-white hover:shadow-md">
+                      <div className="h-2 w-2 rounded-full bg-indigo-500 mt-2 shrink-0"></div>
+                      <p className="text-sm text-slate-700 font-bold">{note}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="p-8 bg-slate-50 border-t border-slate-100 text-center">
+                <button onClick={() => navigate("/MeditationAndExercise")} className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-indigo-100">Start Suggested Session</button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
         {/* AI Suggestion Section */}
         <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-6 mb-8 text-white shadow-xl relative overflow-hidden">
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between">
@@ -230,7 +291,10 @@ const MentalHealthDashboard = () => {
                 </p>
               </div>
             </div>
-            <button className="mt-4 md:mt-0 bg-white text-indigo-600 px-5 py-2 rounded-lg font-bold hover:bg-opacity-90 transition-all">
+            <button
+              className="mt-4 md:mt-0 bg-white cursor-pointer text-indigo-600 px-5 py-2 rounded-lg font-bold hover:bg-opacity-90 transition-all"
+              onClick={() => setisAISuggestionOpen(true)}
+            >
               View Analysis
             </button>
           </div>
