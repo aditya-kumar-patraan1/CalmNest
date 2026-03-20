@@ -17,6 +17,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Toaster, toast } from "react-hot-toast";
 import { useAppContext } from "../Context/AppContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const moodMapping = {
   happy: {
@@ -64,8 +65,13 @@ const moodMapping = {
 };
 
 export default function MoodJournal() {
-  const { userData, BACKEND_URL, savedEntries, setSavedEntries,getSavedEntries } =
-    useAppContext();
+  const {
+    userData,
+    BACKEND_URL,
+    savedEntries,
+    setSavedEntries,
+    getSavedEntries,
+  } = useAppContext();
 
   // Form States
   const [selectedMood, setSelectedMood] = useState("");
@@ -75,6 +81,7 @@ export default function MoodJournal() {
   const [sleepHours, setSleepHours] = useState(7);
   const [stressLevel, setStressLevel] = useState(5);
   const [energyLevel, setEnergyLevel] = useState(5);
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDeleteEntry = async (deletedItemId) => {
@@ -89,7 +96,9 @@ export default function MoodJournal() {
 
       if (res.data.status == 1) {
         toast.success(`Entry deleted..`);
-        setSavedEntries(savedEntries.filter((entry) => entry._id !== deletedItemId));
+        setSavedEntries(
+          savedEntries.filter((entry) => entry._id !== deletedItemId),
+        );
         getSavedEntries();
       } else {
         throw new Error();
@@ -153,7 +162,7 @@ export default function MoodJournal() {
       {/* --- Header --- */}
       <header className="bg-white border-b border-slate-200 pt-10 pb-6 px-6 mb-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
+          <div className="">
             <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
               <div className="p-2 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-100">
                 <BookOpen className="text-white w-6 h-6" />
@@ -164,13 +173,16 @@ export default function MoodJournal() {
               Capture the colors of your mind.
             </p>
           </div>
-          <div className="flex items-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-2xl text-slate-600 font-bold text-sm shadow-sm">
-            <Calendar size={18} className="text-indigo-500" />
-            {new Date().toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex items-center gap-2  border border-slate-200 px-4 py-2 rounded-2xl text-slate-600 font-bold text-sm shadow-sm">
+              <Calendar size={18} className="text-indigo-500" />
+              {new Date().toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </div>
+            <p onClick={()=>navigate("/MentalHealthDashboard")} className="text-blue-600 cursor-pointer hover:underline mt-1 font-medium">View Dashboard</p>
           </div>
         </div>
       </header>
