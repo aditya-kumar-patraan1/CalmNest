@@ -8,7 +8,7 @@ const Bubble = ({ setisChatOpen, isLightMode }) => {
   return (
     <AnimatePresence>
       {isBubbleShow && (
-        <div className="fixed right-6 bottom-6 lg:right-10 lg:bottom-10 z-50">
+        <div className="fixed right-6 cursor-pointer bottom-6 lg:right-10 lg:bottom-10 z-50">
           <motion.div
             initial={{ opacity: 0, scale: 0.5, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
