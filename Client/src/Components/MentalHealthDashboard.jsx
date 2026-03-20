@@ -342,7 +342,7 @@ const MentalHealthDashboard = () => {
               certified experts for a personalized one-to-one session.
             </p>
             <button
-              className="flex items-center gap-2 mx-auto bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-indigo-600 transition-all shadow-lg transform hover:-translate-y-1"
+              className="flex items-center gap-2 mx-auto bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-indigo-600 transition-all shadow-lg transform hover:-translate-y-1 cursor-pointer"
               onClick={() => navigate("/LobbyPage")}
             >
               <FiMessageCircle /> Book a Priority Session
@@ -357,16 +357,19 @@ const MentalHealthDashboard = () => {
             icon={<FiPlus />}
             label="Add Journal"
             color="indigo"
+            className="cursor-pointer"
           />
           <QuickNavBtn
             onClick={() => navigate("/MeditationAndExercise")}
             icon={<FiMoon />}
             label="Meditate"
             color="purple"
+            className="cursor-pointer"
           />
           <QuickNavBtn
             onClick={() => navigate("/QuestionnaireLanding")}
             icon={<FiActivity />}
+            className="cursor-pointer"
             label="Wellness Test"
             color="green"
           />
@@ -375,6 +378,7 @@ const MentalHealthDashboard = () => {
             icon={<FiTrendingUp />}
             label="History"
             color="yellow"
+            className="cursor-pointer"
           />
         </div>
       </div>
