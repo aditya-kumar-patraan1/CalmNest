@@ -1404,13 +1404,13 @@ export const LeftSide = ({ room, email }) => {
                 animate={{ y: 0, x: 0 }}
                 exit={{ y: "100%", x:0 }}
                 transition={{ type: "spring", stiffness: 400, damping: 40 }} 
-                className="fixed inset-0 md:relative md:inset-auto md:w-80 h-full bg-slate-800 border-l border-slate-700 flex flex-col z-40 md:!transform-none"
+                className="fixed inset-0 md:relative md:inset-auto md:w-80 h-full bg-[#FCFDFD] border-l border-slate-100 flex flex-col z-40 md:!transform-none"
               >
                 <div className="p-4 border-b border-slate-700 flex-shrink-0 flex items-center gap-4">
                     <button onClick={toggleComments} className="md:hidden p-1 rounded-full text-white hover:bg-slate-700">
                       <MdArrowBack size={24}/>
                     </button>
-                    <h3 className="font-bold text-lg">Chat</h3>
+                    <h3 className="font-bold text-lg text-gray-600">Chat</h3>
                 </div>
   
                 <div className="flex-1 p-4 overflow-y-auto space-y-4 hide-scrollbar">
@@ -1421,11 +1421,11 @@ export const LeftSide = ({ room, email }) => {
                 <div className="p-2 border-t border-slate-700 flex items-center gap-2 flex-shrink-0 relative">
                      <div className="relative">
                        <button onClick={() => setisEmojiOpen(prev => !prev)} className="p-2 text-slate-300 hover:text-white">
-                          <MdOutlineEmojiEmotions size={24} />
+                          <MdOutlineEmojiEmotions size={24} className="text-gray-600" />
                        </button>
                        <AnimatePresence>
                            {isEmojiOpen && (
-                             <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 10, opacity: 0 }} className="absolute bottom-12 left-0 bg-slate-700 p-2 rounded-lg border border-slate-600 shadow-lg z-50">
+                             <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 10, opacity: 0 }} className="absolute bottom-12 left-0 bg-[#FCFDFD] p-2 rounded-lg border border-slate-100 shadow-lg z-50">
                                  <div className="flex flex-col gap-2">
                                    {chunkedEmojis.map((row, rowIndex) => (
                                       <div key={rowIndex} className="flex gap-2">
@@ -1439,7 +1439,7 @@ export const LeftSide = ({ room, email }) => {
                            )}
                        </AnimatePresence>
                      </div>
-                   <input type="text" value={currMsg} onChange={(e) => setcurrMsg(e.target.value)} onKeyPress={(e) => e.key === "Enter" && sendMessage()} placeholder="Type a message..." className="w-full bg-slate-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                   <input type="text" value={currMsg} onChange={(e) => setcurrMsg(e.target.value)} onKeyPress={(e) => e.key === "Enter" && sendMessage()} placeholder="Type a message..." className="w-full bg-[#FCFDFD] text-black rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                    <button onClick={sendMessage} className="p-3 bg-blue-600 rounded-lg hover:bg-blue-700 transition disabled:opacity-50" disabled={!currMsg.trim()}>
                      <IoSend />
                    </button>
