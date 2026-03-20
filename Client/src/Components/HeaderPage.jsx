@@ -158,7 +158,7 @@ export default function HeaderPage() {
                 </button>
                 <button
                   onClick={() => handleLogout()}
-                  className={`${isLoggedIn ? "block" : "hidden"} px-4 py-2 text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-all`}
+                  className={`${isLoggedIn ? "block" : "hidden"} px-4 py-2 text-sm font-semibold text-slate-600 hover:text-emerald-600 cursor-pointer transition-all`}
                 >
                   Logout
                 </button>

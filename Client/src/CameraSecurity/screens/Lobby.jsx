@@ -31,6 +31,8 @@ const LobbyScreen = () => {
         toast.error("Please enter your name and room ID");
         return;
       }
+      // console.log("email is : ",email);
+      // console.log("room is : ",room);
       socket.emit("room:join", { email, room });
     },
     [email, room, socket]
