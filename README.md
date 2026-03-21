@@ -31,7 +31,13 @@ By leveraging the **MERN Stack**, **GSAP**, and **Framer Motion**, CalmNest prov
 
 * **Hero Page (GSAP Animated)** 🍃
 
-<img src="[https://res.cloudinary.com/dlkuodrjm/image/upload/v1767686923/pic1_rcpyge.png](https://res.cloudinary.com/dlkuodrjm/image/upload/v1767686923/pic1_rcpyge.png)" alt="CalmNest Home Page" />
+<img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/homePage1.png" alt="CalmNest Home Page 1" />
+
+<img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/homePage2.png" alt="CalmNest Home Page 2" />
+
+<img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/homePage3.png" alt="CalmNest Home Page 3" />
+
+<img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/homePage4.png" alt="CalmNest Home Page 4" />
 
 * **Interactive Mood Journal** ✍️
 
