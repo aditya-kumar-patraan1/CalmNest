@@ -27,8 +27,6 @@ By leveraging the **MERN Stack**, **GSAP**, and **Framer Motion**, CalmNest prov
 
 ## 📸 Project Preview
 
-> **Note:** Please update these screenshots to reflect your latest UI/UX changes.
-
 * **Hero Page (GSAP Animated)** 🍃
 
 <img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/homePage1.png" alt="CalmNest Home Page 1" />
