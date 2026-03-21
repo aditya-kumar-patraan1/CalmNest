@@ -46,8 +46,6 @@ By leveraging the **MERN Stack**, **GSAP**, and **Framer Motion**, CalmNest prov
 
 <img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/moodJournal.png" alt="mood journal"/>
 
-<img src="[https://res.cloudinary.com/dlkuodrjm/image/upload/v1767686923/workspace_g526bc.png](https://res.cloudinary.com/dlkuodrjm/image/upload/v1767686923/workspace_g526bc.png)" alt="Mood Journaling UI" />
-
 * **Mood Analysis and AI support Dashboard**
 
 <img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/dashboard.png" alt="Dashboard"/>
