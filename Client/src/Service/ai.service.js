@@ -6,7 +6,7 @@ const ai = new GoogleGenAI({ apiKey: APIKey });
 
 async function mainToMoodGemini(prompt) {
 
-    console.log("started");
+    // console.log("started");
 
     const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
@@ -34,9 +34,9 @@ Response:
     `,
 
     });
-    console.log("Analysed by AI is : ");
-    console.log(response);
-    console.log(response.text);
+    // console.log("Analysed by AI is : ");
+    // console.log(response);
+    // console.log(response.text);
 
     return response.text.trim();
 }

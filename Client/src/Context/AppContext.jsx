@@ -66,7 +66,7 @@ export const AppProvider = (props) => {
       );
 
       if (response.data.status == 1) {
-        console.log("User Data:", response.data.userData);
+        // console.log("User Data:", response.data.userData);
         setUserData(response.data.userData);
         setisLoggedIn(true);
       } else {
@@ -99,7 +99,7 @@ export const AppProvider = (props) => {
   }
 
   useEffect(() => {
-    console.log("called");
+    // console.log("called");
     // getAuthState();
     getUserData();
     getSavedEntries();

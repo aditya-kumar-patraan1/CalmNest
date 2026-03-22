@@ -107,7 +107,7 @@ const ActualAnalyser = () => {
       const result = await mainToMoodGemini(mood.trim());
       setmyActualMood(result);
       toast.success("Mood analyzed");
-      console.log(result);
+      // console.log(result);
       openNewScreen(result);
     } catch (e) {
       toast.error("Server issue");
