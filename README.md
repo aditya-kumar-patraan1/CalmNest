@@ -90,7 +90,7 @@ By leveraging the **MERN Stack**, **GSAP**, and **Framer Motion**, CalmNest prov
 
 1. **Clone the Repository:**
 ```bash
-git clone https://github.com/your-username/CalmNest.git
+git clone https://github.com/aditya-kumar-patraan1/CalmNest.git
 cd CalmNest
 
 ```
