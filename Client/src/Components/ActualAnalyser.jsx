@@ -86,8 +86,7 @@ const ActualAnalyser = () => {
   ];
   
 
-  function openNewScreen() {
-    console.log(myActualMood);
+  function openNewScreen(myActualMood) {
     if (PositiveEmotions.includes(myActualMood)) {
       setpositiveResult(true);
       setnegativeResult(false);
@@ -108,7 +107,7 @@ const ActualAnalyser = () => {
       const result = await mainToMoodGemini(mood.trim());
       setmyActualMood(result);
       toast.success("Mood analyzed");
-      openNewScreen();
+      openNewScreen(result);
     } catch (e) {
       toast.error("Server issue");
     }
