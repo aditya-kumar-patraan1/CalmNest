@@ -60,7 +60,11 @@ By leveraging the **MERN Stack**, **GSAP**, and **Framer Motion**, CalmNest prov
 
 * **Mental Health Assessment Portal** 🔍
 
-<img src="[https://res.cloudinary.com/dlkuodrjm/image/upload/v1767686923/CodeReviewer_nrqlxq.png](https://res.cloudinary.com/dlkuodrjm/image/upload/v1767686923/CodeReviewer_nrqlxq.png)" alt="Assessment System" />
+<img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/QuestnairreBannerPage.png" alt="Health Assessment Portal Image" />
+
+<img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/AssessmentReport.png" alt="Health Assessment Report" />
+
+<img src="https://github.com/aditya-kumar-patraan1/CalmNest/blob/main/Client/src/assets/AssessmentAnalysis.png" alt="Health Assessment Analysis" />
 
 ---
 
