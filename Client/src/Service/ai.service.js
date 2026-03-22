@@ -35,6 +35,8 @@ Response:
 
     });
 
+    console.log(response);
+
     return response.text.trim();
 }
 
