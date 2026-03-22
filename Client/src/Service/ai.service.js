@@ -36,6 +36,7 @@ Response:
     });
     console.log("Analysed by AI is : ");
     console.log(response);
+    console.log(response.text);
 
     return response.text.trim();
 }
