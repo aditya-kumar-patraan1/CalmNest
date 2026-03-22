@@ -34,7 +34,7 @@ Response:
     `,
 
     });
-
+    console.log("Analysed by AI is : ");
     console.log(response);
 
     return response.text.trim();
