@@ -18,7 +18,7 @@ const ActualAnalyser = () => {
   const [isOpen, setisOpen] = useState(false);
   // const meditationLink="https://res.cloudinary.com/diwodg2yv/video/upload/v1756541350/inhale-exhale-ambient-peaceful-meditation-365001_tawmlu.mp3";
   const navigate = useNavigate();
-  const [myActualMood, setmyActualMood] = useState("Neutral");
+  const [myActualMood, setmyActualMood] = useState("");
   const [positiveResult, setpositiveResult] = useState(false);
   const [negativeResult, setnegativeResult] = useState(false);
   const phaseConfig = {
@@ -105,8 +105,8 @@ const ActualAnalyser = () => {
     }
     try {
       // console.log("sended mood is : ",mood);
-      // const result = await mainToMoodGemini(mood.trim());
-      // setmyActualMood(result);
+      const result = await mainToMoodGemini(mood.trim());
+      setmyActualMood(result);
       toast.success("Mood analyzed");
       openNewScreen();
     } catch (e) {
