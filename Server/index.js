@@ -8,6 +8,7 @@ import { userRouter } from "./Routers/UserDataRouters.js";
 import { moodJournalRouter } from "./Routers/moodJournalRouters.js";
 import http from "http";
 import {Server} from "socket.io";
+import { contactRouter } from "./Routers/contactRouter.js";
 const app = express();
 // const { Server } = require("socket.io");
 const server = http.createServer(app);
@@ -32,6 +33,7 @@ app.use(cors({
 app.use("/api/v1", router);
 app.use("/api/v2", userRouter);
 app.use("/api/v3", moodJournalRouter);
+app.use("/api/v4",contactRouter);
 
 const emailToSocketIdMap = new Map();
 const socketidToEmailMap = new Map();
