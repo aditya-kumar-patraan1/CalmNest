@@ -40,4 +40,5 @@ const schema = new mongoose.Schema({
     ]
 }, { timestamps: true });
 
+
 export const moodEntryModel = new mongoose.model("moodJournal", schema);
